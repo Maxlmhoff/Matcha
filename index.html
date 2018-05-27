@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Inscription</title>
+	<title>Matcha - Inscription</title>
+	<link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap-grid.min.css">
 	<link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-	<div>
+	<div id="div_page">
 		<div>
 			<form>
-				<input type="text" name="lastName"><input type="text" name="firstName">
+				<p>Last name :</p>
+				<input type="text" name="lastName">
+				<p>First name :</p>
+				<input type="text" name="firstName">
+				<p>Pseudo :</p>
 				<input type="text" name="pseudo">
+				<p>Mail :</p>
 				<input type="mail" name="mail">
+				<p>Password :</p>
 				<input type="password" name="password">
+				</br>
+				<input type="submit" name="submit">
 			</form>
 		</div>
 	</div>
+	<video autoplay loop muted controls id="video">
+		<source id="source_video" src="./src/video/hands.mp4" type="video/mp4">
+	</video>
 </body>
 </html>
