@@ -1,0 +1,105 @@
+<style>
+.head
+{
+	margin-left: -8px;
+	margin-right: 102px;
+ 	margin-top:-8px;
+	background-color: grey;
+	width: 100vw;
+	height: 60px;
+}
+
+.logo
+{
+	margin-left: 10px;
+	font-size: 45px;
+}
+
+.login
+{
+	font-size: 18px;
+	text-align: center;
+	padding-top: 15px;
+	position: absolute;
+	right: 100px;
+	top:5px;
+	background-color: #4e4b4b;
+	border-radius: 10px;
+	width: 80px;
+	height: 35px;
+	color:black;
+}
+
+.register
+{
+	font-size: 18px;
+	text-align: center;
+	padding-top: 15px;
+	position: absolute;
+	right: 10px;
+	top:5px;
+	background-color: #4e4b4b;
+	border-radius: 10px;
+	width: 80px;
+	height: 35px;
+	color:black;
+}
+
+.left
+{
+	position: absolute;
+	width: 200px;
+	height: 100vh;
+	background-color: blue;
+	margin-left: -8px;
+}
+.sets
+{
+	width: 198px;
+	background-color: white;
+	border: 1px solid black;
+	height: 80px;
+	text-align: center;
+}
+.sets p
+{
+	margin-top: 20px;
+}
+
+.log
+{
+	text-align: center;
+	padding: 10px 10px 10px 10px;
+	margin-left: 220px;
+	margin-top: 20px;
+	border: 1px solid black;
+	border-radius: 10px;
+	width: 400px;
+	height: 540px;
+	box-shadow: 3px 3px 3px;
+}
+
+input
+{
+	width: 330px;
+	height: 40px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	box-shadow: 2px 2px 2px;
+}
+
+input[type="submit"]
+{
+	margin-top: 14px;
+	cursor:pointer;
+	background-color: grey;
+	color:white;
+	width: 300px;
+}
+
+::-webkit-input-placeholder
+{
+	text-align: center;
+}
+
+</style>

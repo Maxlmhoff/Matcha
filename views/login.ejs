@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Matcha</title>
+        <% include header.ejs %>
+         <%- myCss.style %>
+    </head>
+ 
+    <body>
+    <div class="log" style="height: 280px;">
+        <h2> Login </h2>
+        <form action="connexion" method="post">
+            <input type="text" placeholder="Login">
+            <input type="password" placeholder="Passwd">
+            <input type="submit" value="login">
+        </form>
+    </div>
+        <!-- <h1>Le super Chat temps réel !</h1> -->
+
+      <!--   <form action="/" method="post" id="formulaire_chat">
+            <input type="text" name="message" id="message" placeholder="Votre message..." size="50" autofocus />
+            <input type="submit" id="envoi_message" value="Envoyer" />
+        </form> -->
+
+ <!--        <section id="zone_chat">
+            
+        </section>
+ -->
+
+        <!-- <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script> -->
+    </body>
+</html>
