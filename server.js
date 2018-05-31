@@ -10,7 +10,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var myCss = {
          style : fs.readFileSync('./css/style.css','utf8')
      };
-var matcha = fs.readFileSync('matcha.png');
+var matcha = fs.readFileSync('imgs/matcha.png');
 
 
 app.use(express.static(__dirname + '/imgs'));
