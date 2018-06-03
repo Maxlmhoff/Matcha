@@ -1,39 +1,43 @@
-
+// les requires
 var express = require('express');
-var app = express();
-var compression = require('compression');
-var session = require('cookie-session');
-var bodyParser = require('body-parser');
-var fs = require('fs');
-var html = require('html');
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var myCss = {
-         style : fs.readFileSync('./css/style.css','utf8')
+    app = express();
+    compression = require('compression');
+    session = require('cookie-session');
+    bodyParser = require('body-parser');
+    fs = require('fs');
+    html = require('html');
+
+// un commentaire ici
+    urlencodedParser = bodyParser.urlencoded({ extended: false });
+    css = {
+         style : fs.readFileSync('./style.css','utf8')
      };
-var matcha = fs.readFileSync('imgs/matcha.png');
 
+//images
+var title = fs.readFileSync('img/title.png');
+    background = fs.readFileSync('img/background.png');
 
-app.use(express.static(__dirname + '/imgs'));
+app.use(express.static(__dirname + '/img'));
 // app.use(session({secret: 'todotopsecret'}));
 // app.use(compression());
 
 app.get('/', function(req,res){
-    res.render('index.ejs', {myCss: myCss});
+    res.render('index.ejs', {css: css});
 })
 .get('/index', function(req, res) {
     res.render('index.ejs');
 })
 .get('/login', function(req,res){
-    res.render('login.ejs', {myCss: myCss});
+    res.render('login.ejs', {css: css});
 })
 .get('/register', function(req,res){
-    res.render('register.ejs', {myCss: myCss});
+    res.render('register.ejs', {css: css});
 })
 .post('/new_user', urlencodedParser, function(req,res){
-    res.render('new_user.ejs', {myCss: myCss});
+    res.render('new_user.ejs', {css: css});
 })
 .post('/connexion', urlencodedParser, function(req,res){
-    res.render('connexion.ejs', {myCss: myCss});
+    res.render('connexion.ejs', {css: css});
 })
 
 // app.get('/sous-sol', function(req, res) {
