@@ -14,8 +14,8 @@ var express = require('express');
      };
 
 //images
-var title = fs.readFileSync('img/title.png');
-    background = fs.readFileSync('img/background.png');
+// var title = fs.readFileSync('img/title.png');
+//      background = fs.readFileSync('img/background.png');
 
 app.use(express.static(__dirname + '/img'));
 // app.use(session({secret: 'todotopsecret'}));

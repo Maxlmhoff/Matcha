@@ -1,52 +1,41 @@
 <style>
-.head
+#head
 {
 	margin-left: -8px;
 	margin-right: 102px;
  	margin-top:-8px;
 	background-color: grey;
 	width: 100vw;
-	height: 60px;
+	height: 15vmin;
 }
-
-.logo
+#title
 {
-	margin-left: 10px;
-	font-size: 45px;
+	margin:1vmin;
+	margin-left: 2vmin;
+	width:60vw;
+	height:14vmin;
 }
-
 .login
 {
-	font-size: 18px;
+	font-size: 3vmin;
 	text-align: center;
-	padding-top: 15px;
+	padding-top: 2vh;
 	position: absolute;
-	right: 100px;
-	top:5px;
+	right: 20vw;
+	top:3.5vmin;
 	background-color: #4e4b4b;
 	border-radius: 10px;
-	width: 80px;
-	height: 35px;
+	width: 13vw;
+	height: 6vmin;
 	color:black;
 }
-
 .register
 {
-	font-size: 18px;
-	text-align: center;
-	padding-top: 15px;
-	position: absolute;
-	right: 10px;
-	top:5px;
-	background-color: #4e4b4b;
-	border-radius: 10px;
-	width: 80px;
-	height: 35px;
-	color:black;
+	right: 5vw;
 }
-
 .left
 {
+	overflow-y:auto;
 	position: absolute;
 	width: 200px;
 	height: 100vh;
@@ -65,7 +54,6 @@
 {
 	margin-top: 20px;
 }
-
 .log
 {
 	text-align: center;

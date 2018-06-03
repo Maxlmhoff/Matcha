@@ -3,11 +3,12 @@
     <head>
         <meta charset="utf-8" />
         <title>Matcha</title>
-        <% include header.ejs %>
-         <%- myCss.style %>
+        
+         <%- css.style %>
     </head>
  
-    <body>
+    <body background=../background.png>
+        <% include header.ejs %>
     <div class="log" style="height: 280px;">
         <h2> Login </h2>
         <form action="connexion" method="post">
