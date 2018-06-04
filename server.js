@@ -1,6 +1,6 @@
 // les requires
 var express = require('express');
-    app = express();
+    mysql = require('mysql');
     compression = require('compression');
     session = require('cookie-session');
     bodyParser = require('body-parser');
@@ -8,20 +8,37 @@ var express = require('express');
     html = require('html');
 
 // un commentaire ici
+var server = express();
     urlencodedParser = bodyParser.urlencoded({ extended: false });
-    css = {
-         style : fs.readFileSync('./style.css','utf8')
-     };
+    css = { style : fs.readFileSync('./style.css','utf8') };
+    con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "root42"
+    });
 
-//images
-// var title = fs.readFileSync('img/title.png');
-//      background = fs.readFileSync('img/background.png');
+con.connect(function(err) { if (err) throw err;
+    con.query('CREATE DATABASE IF NOT EXISTS `matcha`', function (err) { if (err) throw err; });
+    con.query('USE `matcha`', function (err) { if (err) throw err; });
+    var sql = `CREATE TABLE IF NOT EXISTS users ( \
+        id INT AUTO_INCREMENT PRIMARY KEY, \
+        login VARCHAR(255), \
+        firstname VARCHAR(255), \
+        lastname VARCHAR(255), \
+        pass VARCHAR(255), \
+        email VARCHAR(255), \
+        sex INT DEFAULT 0, \
+        orientation INT DEFAULT 0, \
+        bio VARCHAR(255), \
+        popularity INT DEFAULT 0)`;
+ con.query(sql, function (err, res) { if (err) throw err; }); });
 
-app.use(express.static(__dirname + '/img'));
-// app.use(session({secret: 'todotopsecret'}));
-// app.use(compression());
+server.use(express.static(__dirname + '/img'));
 
-app.get('/', function(req,res){
+server.use(bodyParser.urlencoded({ extended: true }));
+server.listen(8080);
+
+server.get('/', function(req,res){
     res.render('index.ejs', {css: css});
 })
 .get('/index', function(req, res) {
@@ -33,56 +50,12 @@ app.get('/', function(req,res){
 .get('/register', function(req,res){
     res.render('register.ejs', {css: css});
 })
+
 .post('/new_user', urlencodedParser, function(req,res){
-    res.render('new_user.ejs', {css: css});
+    var sql = 'INSERT INTO `users` (`login`, `firstname`, `lastname`, `pass`, `email`) VALUES (?, ?, ?, ?, ?)';
+        variables = [req.body.login, req.body.firstname, req.body.lastname, req.body.pass, req.body.mail];
+        con.query(sql, variables,function (err, res) { if (err) throw err; }); 
+    // var login = req.body.firstname;
+    // console.log("le login est " + login);
 })
-.post('/connexion', urlencodedParser, function(req,res){
-    res.render('connexion.ejs', {css: css});
-})
 
-// app.get('/sous-sol', function(req, res) {
-//     res.setHeader('Content-Type', 'text/plain');
-//     res.send('Vous êtes dans la cave à vins, ces bouteilles sont à moi !');
-// });
-
-// app.get('/etage/1/chambre', function(req, res) {
-//     res.setHeader('Content-Type', 'text/plain');
-//     res.send('Hé ho, c\'est privé ici !');
-// });
-// app.get('/etage/:etagenum/chambre', function(req, res) {
-//     res.render('chambre.ejs', {etage: req.params.etagenum});
-// });
-// app.get('/compter/:nombre', function(req, res) {
-//     var noms = ['Robert', 'Jacques', 'David'];
-//     res.render('page.ejs', {compteur: req.params.nombre, noms: noms});
-// });
-// app.get('/todo', function(req, res) {
-//     res.render('todo.ejs', {todolist: req.session.todolist});
-// });
-// app.post('/todo/ajouter', urlencodedParser, function(req, res) {
-//     // if (req.body.newtodo != '') {
-//         req.session.todolist.push(req.body.newtodo);
-//     // }
-//     res.redirect('/todo');
-// });
-
-// app.get('/todo/supprimer/:id', function(req, res) {
-//     // if (req.params.id != '') {
-//         req.session.todolist.splice(req.params.id, 1);
-//     // }
-//     res.redirect('/todo');
-// });
-
-// app.use(function(req, res, next) {
-//    res.redirect('/todo'); 
-// });
-
-
-
-
-
-.use(function(req, res, next){
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(404).send('Erreur 404 : Page introuvable !');
-});
-app.listen(8080);
