@@ -6,6 +6,7 @@ var express = require('express');
     bodyParser = require('body-parser');
     fs = require('fs');
     html = require('html');
+    bcrypt = require('bcrypt');
 
 // un commentaire ici
 var server = express();
@@ -48,14 +49,47 @@ server.get('/', function(req,res){
     res.render('login.ejs', {css: css});
 })
 .get('/register', function(req,res){
-    res.render('register.ejs', {css: css});
+    res.render('register.ejs', {css: css, error: 'none'});
 })
 
 .post('/new_user', urlencodedParser, function(req,res){
-    var sql = 'INSERT INTO `users` (`login`, `firstname`, `lastname`, `pass`, `email`) VALUES (?, ?, ?, ?, ?)';
-        variables = [req.body.login, req.body.firstname, req.body.lastname, req.body.pass, req.body.mail];
-        con.query(sql, variables,function (err, res) { if (err) throw err; }); 
-    // var login = req.body.firstname;
-    // console.log("le login est " + login);
+    if (req.body.login && req.body.firstname && req.body.lastname && req.body.pass && req.body.confirmpass && req.body.mail)
+    {
+        if (req.body.pass === req.body.confirmpass)
+        {
+            regLow = /[a-z]/; regUp = /[A-Z]/; regNum = /[0-9]/;
+            if (req.body.pass.search(regNum))
+            {
+                if (req.body.pass.search(regLow)) 
+                {
+                    if (req.body.pass.search(RegUp)) 
+                    {
+                        sql = 'SELECT login FROM users WHERE login = ? OR email = ?';
+                        con.query(sql, [req.body.login, req.body.mail],
+                        function (error, result) { if (error) throw error;
+                            if (result.length == 0)
+                            {
+                                bcrypt.hash(req.body.pass, 10, function(err, hash) { if (err) throw err;
+                                sql = 'INSERT INTO `users` (`login`, `firstname`, `lastname`, `pass`, `email`) VALUES (?, ?, ?, ?, ?)';
+                                variables = [req.body.login, req.body.firstname, req.body.lastname, hash, req.body.mail];
+                                con.query(sql, variables,function (err, res) { if (err) throw err; }); });
+                            }
+                            else
+                                res.render('register.ejs', {css: css, error: 'login or email already exists'}); 
+                        });
+                    }
+                    else
+                        res.render('register.ejs', {css: css, error: 'Password must contain an uppercase !'});
+                }
+                else
+                    res.render('register.ejs', {css: css, error: 'Password must contain a lowercase !'});
+            }
+            else
+                res.render('register.ejs', {css: css, error: 'Password must contain at least one number!'});
+        }
+        else
+            res.render('register.ejs', {css: css, error: 'password is not the same as the confirm password'});
+    }
+    else
+        res.render('register.ejs', {css: css, error: 'not all fields have been filled'});
 })
-

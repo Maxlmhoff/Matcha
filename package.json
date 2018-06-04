@@ -2,6 +2,7 @@
     "name": "matcha",
     "version": "0.1.0",
     "dependencies": {
+        "bcrypt": "^2.0.1",
         "body-parser": "~1",
         "cookie-session": "~1",
         "ejs": "~2",

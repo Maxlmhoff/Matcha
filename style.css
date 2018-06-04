@@ -42,6 +42,14 @@
 	background-color: blue;
 	margin-left: -8px;
 }
+#error
+{
+	margin-left: 400px;
+	background:red;
+	width:400px;
+	height:400px;
+}
+
 .sets
 {
 	width: 198px;
