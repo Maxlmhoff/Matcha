@@ -11,11 +11,13 @@
         <% include header.ejs %>
     <div class="log" style="height: 280px;">
         <h2> Login </h2>
-        <form action="connexion" method="post">
-            <input type="text" placeholder="Login">
-            <input type="password" placeholder="Passwd">
+        <form action="login" method="post">
+            <input type="text" placeholder="Login" name="login">
+            <input type="password" placeholder="Passwd" name="pass">
             <input type="submit" value="login">
         </form>
+        <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
+        <% if (typeof success !== 'undefined' && success) { %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
     </div>
         <!-- <h1>Le super Chat temps réel !</h1> -->
 
