@@ -8,6 +8,7 @@ var express = require('express');
     html = require('html');
     bcrypt = require('bcrypt');
     validator = require('validator');
+    var mailer = require("nodemailer");    
 
 
 // un commentaire ici
@@ -80,8 +81,35 @@ server.get('/', function(req,res){
 
 
 
+                                    var smtpTransport = mailer.createTransport("SMTP",{
+                                        service: "Gmail",
+                                        auth: {
+                                            user: "find.your.peer.42@gmail.com",
+                                            pass: "Qwerty1234zxcv"
+                                        }
+                                    });
+    
+                                    var email = req.body.mail;
+    
+                                    var mail = {
+                                        from: "find.your.peer.42@gmail.com",
+                                        to: email,
+                                        subject: "Confirmation de votre compte",
+                                        html: "Clique sur ce lien pour confirmer ton inscription"
+                                    }
+    
+                                    smtpTransport.sendMail(mail, function(error, response){
+                                        if(error){
+                                            console.log("Erreur lors de l'envoie du mail!");
+                                            console.log(error);
+                                        }else{
+                                            console.log("Mail envoyé avec succès!")
+                                        }
+                                        smtpTransport.close();
+                                    });
 
-                                    res.render('register.ejs', {css: css, success: 'BRAVO TU A FAIT UN COMPTE'}); 
+
+                                    res.render('register.ejs', {css: css, success: "Un mail de confirmation vient d'être envoyer !"}); 
                                 }
                                 else
                                     res.render('register.ejs', {css: css, error: 'login or email already exists'}); 
