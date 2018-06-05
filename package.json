@@ -10,7 +10,10 @@
         "express": "^4.16.3",
         "fs": "0.0.1-security",
         "html": "^1.0.0",
+        "htmlspecialchars": "^1.0.5",
+        "nodemailer": "^4.6.5",
         "nodemon": "^1.17.5",
+        "random-key": "^0.3.2",
         "socket.io": "^2.1.1",
         "supervisor": "^0.12.0",
         "validator": "^10.3.0"

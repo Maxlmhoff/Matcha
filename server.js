@@ -8,8 +8,9 @@ var express = require('express');
     html = require('html');
     bcrypt = require('bcrypt');
     validator = require('validator');
-    var mailer = require("nodemailer");    
-
+    mailer = require("nodemailer");    
+    rand = require("random-key");
+    eschtml = require('htmlspecialchars');
 
 // un commentaire ici
 var server = express();
@@ -31,6 +32,7 @@ con.connect(function(err) { if (err) throw err;
         lastname VARCHAR(255), \
         pass VARCHAR(255), \
         email VARCHAR(255), \
+        confirmkey VARCHAR(10), \
         sex INT DEFAULT 0, \
         orientation INT DEFAULT 0, \
         bio VARCHAR(255), \
@@ -60,56 +62,51 @@ server.get('/', function(req,res){
     {
         if (req.body.pass === req.body.confirmpass)
         {
+        var login = eschtml(req.body.login);
+            firstname = eschtml(req.body.firstname)
+            lastname = eschtml(req.body.lastname);
+            pass = eschtml(req.body.pass);
+            email = eschtml(req.body.mail);
             regLow = /[a-z]/; regUp = /[A-Z]/;
-            if (req.body.pass.length > 5)
+            if (pass.length > 5)
             {
-                if (req.body.pass.search(regLow)) 
+                if (pass.search(regLow)) 
                 {
-                    if (req.body.pass.search(regUp) !== -1) 
+                    if (pass.search(regUp) !== -1) 
                     {
-                        if (validator.isEmail(req.body.mail))
+                        if (validator.isEmail(email))
                         {
                             sql = 'SELECT login FROM users WHERE login = ? OR email = ?';
-                            con.query(sql, [req.body.login, req.body.mail],
-                            function (error, result) { if (error) throw error;
+                            con.query(sql, [login, email],
+                            function (error, result) 
+                            { if (error) throw error;
                                 if (result.length == 0)
                                 {
-                                    bcrypt.hash(req.body.pass, 10, function(err, hash) { if (err) throw err;
-                                    sql = 'INSERT INTO `users` (`login`, `firstname`, `lastname`, `pass`, `email`) VALUES (?, ?, ?, ?, ?)';
-                                    variables = [req.body.login, req.body.firstname, req.body.lastname, hash, req.body.mail];
-                                    con.query(sql, variables,function (err, res) { if (err) throw err; }); });
-
-
-
-                                    var smtpTransport = mailer.createTransport("SMTP",{
-                                        service: "Gmail",
-                                        auth: {
-                                            user: "find.your.peer.42@gmail.com",
-                                            pass: "Qwerty1234zxcv"
-                                        }
+                                var smtpTransport = mailer.createTransport("SMTP", 
+                                    {
+                                        service: "Gmail", auth: { user: "find.your.peer.42@gmail.com", pass: "Qwerty1234zxcv" } 
                                     });
-    
-                                    var email = req.body.mail;
-    
-                                    var mail = {
-                                        from: "find.your.peer.42@gmail.com",
-                                        to: email,
-                                        subject: "Confirmation de votre compte",
-                                        html: "Clique sur ce lien pour confirmer ton inscription"
-                                    }
-    
-                                    smtpTransport.sendMail(mail, function(error, response){
-                                        if(error){
-                                            console.log("Erreur lors de l'envoie du mail!");
-                                            console.log(error);
-                                        }else{
-                                            console.log("Mail envoyé avec succès!")
+                                    key = rand.generateDigits(9);
+                                    mail = 
+                                        {
+                                            from: "find.your.peer.42@gmail.com", to: email, subject: "Confirmation de votre compte",
+                                            html: '<html><body><div align=center> \
+                                            CLICK ON THE FOLLOWING LINK TO VALIDATE YOUR ACCOUNT: <BR />\
+                                            <a href=http://localhost:8080/confirm.js?login='+login +'&key='+key +'>Confirm your Account</a> \
+                                            </div></body></html>'
                                         }
-                                        smtpTransport.close();
-                                    });
-
-
-                                    res.render('register.ejs', {css: css, success: "Un mail de confirmation vient d'être envoyer !"}); 
+                                        smtpTransport.sendMail(mail, function(error, response){
+                                        if (error) { 
+                                            res.render('register.ejs', {css: css, error: 'Error whilst sending e-mail : ' + error}); 
+                                        }
+                                        else { 
+                                            res.render('register.ejs', {css: css, success: "Un mail de confirmation vient d'être envoyer !"});
+                                        }
+                                        smtpTransport.close(); });
+                                        bcrypt.hash(pass, 10, function(err, hash) { if (err) throw err;
+                                        sql = 'INSERT INTO `users` (`login`, `firstname`, `lastname`, `pass`, `email`) VALUES (?, ?, ?, ?, ?, ?)';
+                                        variables = [login, firstname, lastname, hash, email, key];
+                                        con.query(sql, variables,function (err, res) { if (err) throw err; }); });
                                 }
                                 else
                                     res.render('register.ejs', {css: css, error: 'login or email already exists'}); 
