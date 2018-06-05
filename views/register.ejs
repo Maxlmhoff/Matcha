@@ -18,7 +18,9 @@
                 <input type="mail" name=mail placeholder="Email">
                 <input type="submit" name=submit Value="register">
             </form>
+        <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
+        <% if (typeof success !== 'undefined' && success) { %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
         </div>
-        <% if (error !== 'none') { %> <div id=error>Error: <%- error %></div> <% } %>
+
     </body>
 </html>

@@ -81,7 +81,7 @@ server.get('/', function(req,res){
 
 
 
-                                    res.render('register.ejs', {css: css, error: 'BRAVO TU A FAIT UN COMPTE'}); 
+                                    res.render('register.ejs', {css: css, success: 'BRAVO TU A FAIT UN COMPTE'}); 
                                 }
                                 else
                                     res.render('register.ejs', {css: css, error: 'login or email already exists'}); 
