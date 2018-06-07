@@ -69,7 +69,6 @@ server.get('/', function(req,res){
 .post('/login', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/login.js")+'');
 })
-
 .get('/confirm', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/confirm.js")+'');
  })

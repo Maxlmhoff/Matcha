@@ -33,7 +33,7 @@ if (req.body.login && req.body.firstname && req.body.lastname && req.body.pass &
                                             from: "find.your.peer.42@gmail.com", to: email, subject: "Confirmation de votre compte",
                                             html: '<html><body><div align=center> \
                                             CLICK ON THE FOLLOWING LINK TO VALIDATE YOUR ACCOUNT: <BR />\
-                                            <a href=http://localhost:8080/confirm.js?login='+login +'&key='+key +'>Confirm your Account</a> \
+                                            <a href=http://localhost:8080/confirm?login='+login +'&key='+key +'>Confirm your Account</a> \
                                             </div></body></html>'
                                         }
 

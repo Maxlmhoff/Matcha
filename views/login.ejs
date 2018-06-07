@@ -9,7 +9,7 @@
  
     <body background=../background.png>
         <% include header.ejs %>
-    <div class="log" style="height: 280px;">
+    <div class="log" style="height: 290px;">
         <h2> Login </h2>
         <form action="login" method="post">
             <input type="text" placeholder="Login" name="login">
@@ -19,19 +19,5 @@
         <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
         <% if (typeof success !== 'undefined' && success) { %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
     </div>
-        <!-- <h1>Le super Chat temps réel !</h1> -->
-
-      <!--   <form action="/" method="post" id="formulaire_chat">
-            <input type="text" name="message" id="message" placeholder="Votre message..." size="50" autofocus />
-            <input type="submit" id="envoi_message" value="Envoyer" />
-        </form> -->
-
- <!--        <section id="zone_chat">
-            
-        </section>
- -->
-
-        <!-- <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <script src="/socket.io/socket.io.js"></script> -->
     </body>
 </html>
