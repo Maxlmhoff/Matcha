@@ -12,6 +12,8 @@ var express = require('express');
     rand = require("random-key");
     eschtml = require('htmlspecialchars');
     vm = require('vm');
+    xoauth2 = require('xoauth2');
+
 
 // un commentaire ici
 var server = express();
@@ -38,6 +40,7 @@ con.connect(function(err) { if (err) throw err;
         orientation INT DEFAULT 0, \
         bio VARCHAR(255), \
         popularity INT DEFAULT 0)`;
+
  con.query(sql, function (err, res) { if (err) throw err; }); });
 
 server.use(express.static(__dirname + '/img'));

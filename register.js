@@ -26,6 +26,7 @@ if (req.body.login && req.body.firstname && req.body.lastname && req.body.pass &
                                     {
                                         service: "Gmail", auth: { user: "find.your.peer.42@gmail.com", pass: "Qwerty1234zxcv" } 
                                     });
+                                    
                                     key = rand.generateDigits(9);
                                     mail = 
                                         {
@@ -35,16 +36,19 @@ if (req.body.login && req.body.firstname && req.body.lastname && req.body.pass &
                                             <a href=http://localhost:8080/confirm.js?login='+login +'&key='+key +'>Confirm your Account</a> \
                                             </div></body></html>'
                                         }
+
+
+
                                         smtpTransport.sendMail(mail, function(error, response){
                                         if (error) { 
-                                            res.render('register.ejs', {css: css, error: 'Error whilst sending e-mail : ' + error}); 
-                                        }
+                                    res.render('register.ejs', {css: css, error: 'Error whilst sending e-mail : ' + error}); 
+                                }
                                         else { 
-                                            res.render('register.ejs', {css: css, success: "Un mail de confirmation vient d'être envoyer !"});
-                                        }
-                                        smtpTransport.close(); });
+                                    res.render('register.ejs', {css: css, success: "Un mail de confirmation vient d'être envoyer !"});
+                                }
+                                    smtpTransport.close(); });
                                         bcrypt.hash(pass, 10, function(err, hash) { if (err) throw err;
-                                        sql = 'INSERT INTO `users` (`login`, `firstname`, `lastname`, `pass`, `email`) VALUES (?, ?, ?, ?, ?, ?)';
+                                        sql = 'INSERT INTO `users` (`login`, `firstname`, `lastname`, `pass`, `email`, `confirmkey`) VALUES (?, ?, ?, ?, ?, ?)';
                                         variables = [login, firstname, lastname, hash, email, key];
                                         con.query(sql, variables,function (err, res) { if (err) throw err; }); });
                                 }
