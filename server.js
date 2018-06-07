@@ -12,7 +12,6 @@ var express = require('express');
     rand = require("random-key");
     eschtml = require('htmlspecialchars');
     vm = require('vm');
-    xoauth2 = require('xoauth2');
 
 
 // un commentaire ici
@@ -37,6 +36,7 @@ con.connect(function(err) { if (err) throw err;
         email VARCHAR(255), \
         confirmkey VARCHAR(10), \
         sex INT DEFAULT 0, \
+        confirm INT DEFAULT 0, \
         orientation INT DEFAULT 0, \
         bio VARCHAR(255), \
         popularity INT DEFAULT 0)`;
@@ -60,9 +60,16 @@ server.get('/', function(req,res){
 .get('/register', function(req,res){
     res.render('register.ejs', {css: css, error: 'none'});
 })
+.get('/profile', function(req,res){
+    res.render('profile.ejs', {css: css, error: 'none'});
+})
 .post('/register', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/register.js")+'');
 })
 .post('/login', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/login.js")+'');
 })
+
+.get('/confirm', urlencodedParser, function(req,res){
+    eval(fs.readFileSync(__dirname + "/confirm.js")+'');
+ })

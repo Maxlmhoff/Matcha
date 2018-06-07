@@ -85,6 +85,11 @@ input[type="submit"]
 	color:white;
 	width: 300px;
 }
+.cadre_profil{
+	border: solid grey 1px;
+	width: 600px;
+	height: 100px;;
+}
 
 ::-webkit-input-placeholder
 {
