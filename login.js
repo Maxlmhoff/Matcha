@@ -6,7 +6,6 @@ if (req.body.login && req.body.pass)
     function (err, result) { if (err) throw err;
        if (result.length > 0)
        {
-           console.log(result[0].confirm);
            bcrypt.compare(req.body.pass, result[0].pass, function(err, reso) 
            {
                if (reso)

@@ -5,7 +5,6 @@ sql = 'SELECT * FROM users WHERE email = ?';
     function (error, result) 
     { 
     if (error) throw error;
-    console.log(email);
     if (result.length > 0)
     {
 
@@ -19,8 +18,10 @@ var smtpTransport = mailer.createTransport("SMTP",
         {
             from: "find.your.peer.42@gmail.com", to: email, subject: "Reinitialisation de votre mot de passe",
             html: '<html><body><div align=center> \
+            YOUR LOGIN : <BR />\
+            '+result[0].login+'<BR /><BR />\
             YOUR NEW PASSWORD : <BR />\
-            '+newpass+'\
+            '+newpass+'<BR />\
             </div></body></html>'
         }
         
@@ -36,10 +37,10 @@ var smtpTransport = mailer.createTransport("SMTP",
             function (error, result) 
             { 
             if (error) throw error; }); });
-        res.render('login.ejs', {css: css, success: "Un mail de reinitialisation du mot de passe vient d'être envoyé !"});
+        res.render('login.ejs', {css: css, success2: "Un mail de reinitialisation du mot de passe vient d'être envoyé !"});
      }
      smtpTransport.close(); });
     }
     else
-        res.render('login.ejs', {css: css, error: "Email inexistant !"});
+        res.render('login.ejs', {css: css, error2: "Email inexistant !"});
 });
