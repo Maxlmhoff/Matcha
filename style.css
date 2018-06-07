@@ -43,6 +43,17 @@
 	margin-left: -8px;
 }
 
+#forgot
+{
+	text-align: center;
+	width: 400px;
+	margin-top: 50px;
+	margin-left: 230px;
+	border: 1px solid black;
+	box-shadow: 3px 3px 3px;
+	border-radius: 10px;
+}
+
 .sets
 {
 	width: 198px;
