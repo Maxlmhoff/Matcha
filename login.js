@@ -7,12 +7,21 @@ if (req.body.login && req.body.pass)
                     if (err) throw err;
                     if (result.length > 0)
                     {
-                        bcrypt.compare(req.body.pass, result[0].pass, function(err, reso) {
-                        if (reso)
-                            res.render('login.ejs', {css: css, success: 'BRAVO TU ES CONNECTÉ !'});
-                        else
-                            res.render('login.ejs', {css: css, error: 'ERREUR DE CONNEXION ! (invalid pass)'});
-                        });
+                        console.log(result[0].confirm);
+                        
+                            bcrypt.compare(req.body.pass, result[0].pass, function(err, reso) {
+                            if (reso)
+                            {
+                                if (result[0].confirm === 1)
+                                {
+                                    res.render('login.ejs', {css: css, success: 'BRAVO TU ES CONNECTÉ !'});
+                                }
+                                else
+                                    res.render('login.ejs', {css: css, error: 'Veuillez confirmer votre compte par email'});
+                            }
+                            else
+                                res.render('login.ejs', {css: css, error: 'ERREUR DE CONNEXION ! (invalid pass)'});
+                            });
                     }
                     else
                     {
