@@ -50,7 +50,7 @@ if (req.body.login && req.body.firstname && req.body.lastname && req.body.pass &
                                         bcrypt.hash(pass, 10, function(err, hash) { if (err) throw err;
                                         sql = 'INSERT INTO `users` (`login`, `firstname`, `lastname`, `pass`, `email`, `confirmkey`) VALUES (?, ?, ?, ?, ?, ?)';
                                         variables = [login, firstname, lastname, hash, email, key];
-                                        con.query(sql, variables,function (err, res) { if (err) throw err; }); });
+                                        con.query(sql, variables, function (err, res) { if (err) throw err; }); });
                                 }
                                 else
                                     res.render('register.ejs', {css: css, error: 'login or email already exists'}); 

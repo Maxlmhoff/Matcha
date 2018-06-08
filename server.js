@@ -67,8 +67,9 @@ server.get('/', function(req,res){
 })
 .get('/profile', function(req,res){
     ssn = req.session;
-    res.render('profile.ejs', {css: css, error: 'none'});
-})
+    con.query('SELECT * FROM `users` WHERE login = ?', [ssn.login], function (err, result) { if (err) throw err; 
+    res.render('profile.ejs', {css: css, error: 'none', profile: result[0]});
+}); })
 .get('/logout', function(req,res){
     ssn = req.session;
     req.session.destroy();
@@ -76,6 +77,9 @@ server.get('/', function(req,res){
 })
 .post('/register', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/register.js")+'');
+})
+.post('/profile', urlencodedParser, function(req,res){
+    eval(fs.readFileSync(__dirname + "/profile.js")+'');
 })
 .post('/login', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/login.js")+'');
