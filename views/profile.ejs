@@ -35,22 +35,22 @@
                 </div>
             </form>
             <form id="nom" class="cadre_profil">
-                Lastname
-                <input type="text" name="lastname" placeholder="Change Lastname">
+                Edit Lastname 
+                <input type="text" name="lastname" placeholder="<%- profile.lastname %>">
                 <input type="submit" name="submit" Value="OK">
             </form>
             <form id="prenom" class="cadre_profil">
-                    Firstname
-                    <input type="text" name="firstname" placeholder="Change First Name">
+                    Edit Firstname
+                    <input type="text" name="firstname" placeholder="<%- profile.firstname %>">
                     <input type="submit" name="submit" Value="OK">
             </form>
             <form id="mail" class="cadre_profil">
-                    Mail
-                    <input type="mail" name="mail" placeholder='mail = <%- profile.email %>'>
+                    Edit email
+                    <input type="mail" name="mail" placeholder='<%- profile.email %>'>
                     <input type="submit" name="submit" Value="OK">
             </form>
             <form id="password" class="cadre_profil">
-                    password
+                    Edit Password:
                     <input type="text" name="pass" placeholder="New pass">
                     <input type="text" name="pass" placeholder="New pass confirm">
                     <input type="submit" name="submit" Value="OK">
