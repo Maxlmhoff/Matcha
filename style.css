@@ -38,10 +38,11 @@
 #forgot
 {
 	text-align: center;
-	width: 400px;
+	width: 360px;
 	height: 240px;
-	margin-top: 50px;
-	margin-left: 230px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
 	border: 1px solid black;
 	box-shadow: 3px 3px 3px;
 	border-radius: 10px;
@@ -63,11 +64,12 @@
 {
 	text-align: center;
 	padding: 10px 10px 10px 10px;
-	margin-left: 220px;
+	margin-left: auto;
+	margin-right: auto;
 	margin-top: 20px;
 	border: 1px solid black;
 	border-radius: 10px;
-	width: 400px;
+	width: 360px;
 	height: 560px;
 	box-shadow: 3px 3px 3px;
 }
@@ -105,6 +107,7 @@ input[type="submit"]
     justify-content: space-around;
     align-items: center;
 }
+
 #page_profile_div{
     /* margin-left: 220px; */
     border: solid black 1px;
@@ -116,6 +119,7 @@ input[type="submit"]
     justify-content: space-around;
     align-items: center;
 }
+
 .photo{
     height: 18vh;
     width: auto;
