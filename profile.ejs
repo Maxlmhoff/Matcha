@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Matcha - Profile</title>
+        
+         <%- css.style %>
+    </head>
+ 
+        <% include header.ejs %>
+        <body background=../background.png>
+        <h2> Your profile </h2>
+        <div id="page_profile_div">
+            <form id="photo_case" class="cadre_profil">
+                <div  class="div_photo">
+                    Photo de profil
+                    <img src="https://pp.userapi.com/c636218/v636218955/3a3f5/oGMsEyLeTZs.jpg" class="photo" id="profile_photo">
+                    <input type="file" name="upload" value="upload" id="upload" accept="image/*">
+                </div>
+                <div class="div_photo">
+                    <img src="https://pp.userapi.com/c636218/v636218955/3a3f5/oGMsEyLeTZs.jpg" class="photo">
+                    <input type="file" name="upload" value="upload" id="upload" accept="image/*">
+                </div>
+                <div class="div_photo">
+                    <img src="https://pp.userapi.com/c636218/v636218955/3a3f5/oGMsEyLeTZs.jpg" class="photo">
+                    <input type="file" name="upload" value="upload" id="upload" accept="image/*">
+                </div>
+                 <div class="div_photo">
+                    <img src="https://pp.userapi.com/c636218/v636218955/3a3f5/oGMsEyLeTZs.jpg" class="photo">
+                    <input type="file" name="upload" value="upload" id="upload" accept="image/*">
+                </div>
+                <div class="div_photo">
+                    <img src="https://pp.userapi.com/c636218/v636218955/3a3f5/oGMsEyLeTZs.jpg" class="photo">
+                    <input type="file" name="upload" value="upload" id="upload" accept="image/*">
+                </div>
+            </form>
+            <form id="nom" class="cadre_profil">
+                Lastname
+                <input type="text" name="lastname" placeholder="Change Lastname">
+                <input type="submit" name="submit" Value="OK">
+            </form>
+            <form id="prenom" class="cadre_profil">
+                    Firstname
+                    <input type="text" name="firstname" placeholder="Change First Name">
+                    <input type="submit" name="submit" Value="OK">
+            </form>
+            <form id="mail" class="cadre_profil">
+                    Mail
+                    <input type="text" name="mail" placeholder="Change mail">
+                    <input type="submit" name="submit" Value="OK">
+            </form>
+            <form id="password" class="cadre_profil">
+                    password
+                    <input type="text" name="pass" placeholder="New pass">
+                    <input type="text" name="pass" placeholder="New pass confirm">
+                    <input type="submit" name="submit" Value="OK">
+            </form>
+            <form id="orientation_sexuelle" class="cadre_profil">
+                Tu aimes                :
+                Homme : <input type="radio" name="homme">
+                Femme: <input type="radio" name="femme">
+                Antoine :<input type="radio" name="antoine">
+            </form>
+            <form id="genre" class="cadre_profil">
+                    Tu veux  :
+                    Homme :   <br><input type="radio" name="homme">
+                    Femme: <input type="radio" name="femme">
+                    Antoine :<input type="radio" name="antoine">
+            </form>
+            <form id="bio" class="cadre_profil">
+                Bio en reflexion
+            </form>
+            <form id="tag" class="cadre_profil">
+                Tag à venir
+            </form>
+            
+        </div>
+        <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
+        <% if (typeof success !== 'undefined' && success) { %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
+   
+    </body>
+</html>

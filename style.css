@@ -97,15 +97,43 @@ input[type="submit"]
 	color:white;
 	width: 300px;
 }
-.cadre_profil{
-	border: solid grey 1px;
-	width: 600px;
-	height: 100px;;
-}
 
 ::-webkit-input-placeholder
 {
 	text-align: center;
+}
+
+
+/* PROFILE */
+.cadre_profil{
+    border: solid grey 1px;
+    width: 90vw;
+    height: 5vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#page_profile_div{
+    /* margin-left: 220px; */
+    border: solid black 1px;
+}
+#photo_case{
+    height: 25vh;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.photo{
+    height: 18vh;
+    width: auto;
+}
+.div_photo{
+    display: flex;
+    flex-direction: column;
+}
+#profile_photo{
+    height: 22vh;
 }
 
 </style>
