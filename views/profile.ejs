@@ -7,8 +7,9 @@
          <%- css.style %>
     </head>
  
-        <% include header.ejs %>
-        <body background=../background.png>
+        
+    <body background=../background.png>
+    <% include header.ejs %>
         <h2> Your profile </h2>
         <div id="page_profile_div">
             <form id="photo_case" class="cadre_profil">
@@ -34,49 +35,54 @@
                     <input type="file" name="upload" value="upload" id="upload" accept="image/*">
                 </div>
             </form>
-            <form id="nom" class="cadre_profil">
-                Edit Lastname 
-                <input type="text" name="lastname" placeholder="<%- profile.lastname %>">
-                <input type="submit" name="submit" Value="OK">
+           <form action="/profile" method="post">
+                <select name="edit" id='modifyuserlist' onchange="placeholder()">
+                    <option value='1'> Login </option>
+                    <option value='2'> Firstname </option>
+                    <option value='3'> Lastname </option>
+                    <option value='4'> Password </option>
+                    <option value='5'> Email </option>
+                </select>
+                <input type="text" name="changement" id='modifyuser'>
+                <script>
+                    window.onload = placeholder();
+                    function placeholder() {
+                        var s = document.getElementById("modifyuserlist").value;
+                        if (s == '1')
+                            var i = '<%- profile.login %>'
+                        else if (s == '2')
+                            var i = '<%- profile.firstname %>'
+                        else if (s == '3')
+                            var i = '<%- profile.lastname %>'
+                        else if (s == '4')
+                            var i = 'New Password'
+                        else if (s == '5')
+                            var i = '<%- profile.email %>'
+                        document.getElementById("modifyuser").placeholder = i;
+                    }
+                </script>
+                <input type="submit" name="general" value="Modify">
             </form>
-            <form id="prenom" class="cadre_profil">
-                    Edit Firstname
-                    <input type="text" name="firstname" placeholder="<%- profile.firstname %>">
-                    <input type="submit" name="submit" Value="OK">
+            <form action="/profile" method="post">
+                Sexual Orientation :
+                 <select name="edit">
+                    <option> none </option>
+                    <option> Heterosexual </option>
+                    <option> Bisexual </option>
+                    <option> Bicurious </option>
+                    <option> Homosexual </option>
+                    <option> Pansexual </option>
+                    <option> Demisexual </option>
+                    <option> Heteronormative </option>
+                    <option> Polyamorous </option>
+                    <option> Grey Asexual </option>
+                    <option> Asexual </option>
+                    <option> Questioning </option>
+                    <option> Other </option>
+                <input type="submit" name="orientation" value="Modify">
             </form>
-            <form id="mail" class="cadre_profil">
-                    Edit email
-                    <input type="mail" name="mail" placeholder='<%- profile.email %>'>
-                    <input type="submit" name="submit" Value="OK">
-            </form>
-            <form id="password" class="cadre_profil">
-                    Edit Password:
-                    <input type="text" name="pass" placeholder="New pass">
-                    <input type="text" name="pass" placeholder="New pass confirm">
-                    <input type="submit" name="submit" Value="OK">
-            </form>
-            <form id="orientation_sexuelle" class="cadre_profil">
-                Tu aimes                :
-                Homme : <input type="radio" name="homme">
-                Femme: <input type="radio" name="femme">
-                Antoine :<input type="radio" name="antoine">
-            </form>
-            <form id="genre" class="cadre_profil">
-                    Tu veux  :
-                    Homme :   <br><input type="radio" name="homme">
-                    Femme: <input type="radio" name="femme">
-                    Antoine :<input type="radio" name="antoine">
-            </form>
-            <form id="bio" class="cadre_profil">
-                Bio en reflexion
-            </form>
-            <form id="tag" class="cadre_profil">
-                Tag à venir
-            </form>
-            
         </div>
         <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
         <% if (typeof success !== 'undefined' && success) { %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
-   
     </body>
 </html>

@@ -25,8 +25,7 @@ if (req.body.login && req.body.firstname && req.body.lastname && req.body.pass &
                                 var smtpTransport = mailer.createTransport("SMTP", 
                                     {
                                         service: "Gmail", auth: { user: "find.your.peer.42@gmail.com", pass: "Qwerty1234zxcv" } 
-                                    });
-                                    
+                                    });           
                                     key = rand.generateDigits(9);
                                     mail = 
                                         {
@@ -36,9 +35,6 @@ if (req.body.login && req.body.firstname && req.body.lastname && req.body.pass &
                                             <a href=http://localhost:8080/confirm?login='+login +'&key='+key +'>Confirm your Account</a> \
                                             </div></body></html>'
                                         }
-
-
-
                                         smtpTransport.sendMail(mail, function(error, response){
                                         if (error) { 
                                     res.render('register.ejs', {css: css, error: 'Error whilst sending e-mail : ' + error}); 

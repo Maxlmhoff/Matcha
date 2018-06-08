@@ -10,13 +10,13 @@
         <div class="log">
             <h2> Inscription </h2>
             <form action="register" method="post">
-                <input type="text" name=login placeholder="Username">
-                <input type="text" name=firstname placeholder="First Name">
-                <input type="text" name=lastname placeholder="Last Name">
-                <input type="password" name=pass placeholder="Password">
-                <input type="password" name=confirmpass placeholder="Password Confirm">
-                <input type="mail" name=mail placeholder="Email">
-                <input type="submit" name=submit Value="register">
+                <input type="text" class='user' name=login placeholder="Username">
+                <input type="text" class='user' name=firstname placeholder="First Name">
+                <input type="text" class='user' name=lastname placeholder="Last Name">
+                <input type="password" class='user' name=pass placeholder="Password">
+                <input type="password" class='user' name=confirmpass placeholder="Password Confirm">
+                <input type="mail" class='user' name=mail placeholder="Email">
+                <input type="submit" class='user userinput' name=submit Value="register">
             </form>
         <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
         <% if (typeof success !== 'undefined' && success) { %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>

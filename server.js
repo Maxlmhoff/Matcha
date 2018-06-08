@@ -20,9 +20,9 @@ var server = express();
     urlencodedParser = bodyParser.urlencoded({ extended: false });
     css = { style : fs.readFileSync('./style.css','utf8') };
     con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root42"
+        host: "localhost",
+        user: "root",
+        password: "root42"
     });
 
 con.connect(function(err) { if (err) throw err;
