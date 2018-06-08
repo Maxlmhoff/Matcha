@@ -45,7 +45,7 @@ con.connect(function(err) { if (err) throw err;
  con.query(sql, function (err, res) { if (err) throw err; }); });
 
 server.use(express.static(__dirname + '/img'));
-server.use(ssn({ secret: 'keyboard cat', cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
+server.use(ssn({ secret: 'Eloi has a badass secret', resave: true, saveUninitialized: true}));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.listen(8080);
 
