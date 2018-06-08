@@ -41,23 +41,7 @@
                 <option value='5'> Email </option>
             </select>
             <input type="text" name="changement" id='modifyuser'>
-            <script>
-                window.onload = placeholder();
-                function placeholder() {
-                    var s = document.getElementById("modifyuserlist").value;
-                    if (s == '1')
-                        var i = '<%- profile.login %>'
-                    else if (s == '2')
-                        var i = '<%- profile.firstname %>'
-                    else if (s == '3')
-                        var i = '<%- profile.lastname %>'
-                    else if (s == '4')
-                        var i = 'New Password'
-                    else if (s == '5')
-                        var i = '<%- profile.email %>'
-                    document.getElementById("modifyuser").placeholder = i;
-                }
-            </script>
+            
             <input type="submit" name="general" value="Modify">
         </form>
         <form action="/profile" method="post">
@@ -82,5 +66,21 @@
     </div>
     <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
     <% if (typeof success !== 'undefined' && success) { %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
-</body>
-</html>
+</body></html>
+
+<script>
+    window.onload = placeholder();
+    function placeholder() {
+        var s = document.getElementById("modifyuserlist").value;
+        if (s == '1')
+            var i = '<%- profile.login %>'
+        else if (s == '2')
+            var i = '<%- profile.firstname %>'
+        else if (s == '3')
+            var i = '<%- profile.lastname %>'
+        else if (s == '4')
+            var i = 'New Password'
+        else if (s == '5')
+            var i = '<%- profile.email %>'
+        document.getElementById("modifyuser").placeholder = i; }
+</script>
