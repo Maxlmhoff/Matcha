@@ -33,15 +33,7 @@
 {
 	right: 5vw;
 }
-.left
-{
-	overflow-y:auto;
-	position: absolute;
-	width: 200px;
-	height: 100vh;
-	background-color: blue;
-	margin-left: -8px;
-}
+
 
 #forgot
 {
