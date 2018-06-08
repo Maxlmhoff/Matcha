@@ -8,7 +8,9 @@ if (req.query.login && req.query.key)
     	{
     		sql = 'UPDATE users SET confirm = 1 WHERE login = ?';
 			con.query(sql, [req.query.login], function (err) { if (err) throw err; });
-    		res.render('index.ejs', {css: css, error: 'none'});
+             ssn = req.session;
+             ssn.login = req.body.login;
+    		res.render('login.ejs', {css: css, success: 'Votre compte est activé ! Connectez-vous !'});
  		}
 		else
     		res.render('register.ejs', {css: css, error: 'Something went wrong, your account was not confirmed'});

@@ -2,7 +2,7 @@
 var express = require('express');
     mysql = require('mysql');
     compression = require('compression');
-    session = require('cookie-session');
+    cookie = require('cookie-session');
     bodyParser = require('body-parser');
     fs = require('fs');
     html = require('html');
@@ -12,6 +12,7 @@ var express = require('express');
     rand = require("random-key");
     eschtml = require('htmlspecialchars');
     vm = require('vm');
+    ssn = require('express-session');
 
 
 // un commentaire ici
@@ -44,24 +45,34 @@ con.connect(function(err) { if (err) throw err;
  con.query(sql, function (err, res) { if (err) throw err; }); });
 
 server.use(express.static(__dirname + '/img'));
-
+server.use(ssn({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.listen(8080);
 
 server.get('/', function(req,res){
+    ssn = req.session;
     res.render('index.ejs', {css: css});
 })
 .get('/index', function(req, res) {
+    ssn = req.session;
     res.render('index.ejs');
 })
 .get('/login', function(req,res){
+    ssn = req.session;
     res.render('login.ejs', {css: css});
 })
 .get('/register', function(req,res){
+    ssn = req.session;
     res.render('register.ejs', {css: css, error: 'none'});
 })
 .get('/profile', function(req,res){
+    ssn = req.session;
     res.render('profile.ejs', {css: css, error: 'none'});
+})
+.get('/logout', function(req,res){
+    ssn = req.session;
+    req.session.destroy();
+    res.redirect('/');
 })
 .post('/register', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/register.js")+'');

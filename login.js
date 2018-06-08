@@ -12,6 +12,8 @@ if (req.body.login && req.body.pass)
                {
                    if (result[0].confirm === 1)
                    {
+                        ssn = req.session;
+                        ssn.login = req.body.login;
                        res.render('login.ejs', {css: css, success: 'BRAVO TU ES CONNECTÉ !'});
                    }
                    else
