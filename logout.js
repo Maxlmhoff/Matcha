@@ -1,1 +1,1 @@
-req.session.destroy();
+req.session.destroy()

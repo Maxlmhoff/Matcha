@@ -17,6 +17,7 @@
                 <option value='5'> Email </option>
             </select>
             <input type="text" name="changement" id='modifyuser'>
+            <input type="text" name="confirm" placeholder=Confirm>
             <input type="submit" name="general" value="modifyuser">
         </form>
         <form action="/profile" method="post">
@@ -39,8 +40,10 @@
         </select>
         <input type="submit" name="sub_orientation" value="modify">
         </form>
-    <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
-    <% if (typeof success !== 'undefined' && success) { %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
+    <% if (typeof error !== 'undefined' && error && error !== 'none') { 
+    %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
+    <% if (typeof success !== 'undefined' && success) { 
+    %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
 </body></html>
 
 <script>
