@@ -2,36 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Matcha - Profile</title>
+    <title>Your Profile</title>
      <%- css.style %>
 </head>     
 <body background=../background.png>
 <% include header.ejs %>
     <h2> Your profile </h2>
-    <div id="page_profile_div">
-        <form id="photo_case" class="cadre_profil">
-            <div  class="div_photo">
-                Photo de profil
-                <img src="https://pp.userapi.com/c636218/v636218955/3a3f5/oGMsEyLeTZs.jpg" class="photo" id="profile_photo">
-                <input type="file" name="upload" value="upload" id="upload" accept="image/*">
-            </div>
-            <div class="div_photo">
-                <img src="https://pp.userapi.com/c636218/v636218955/3a3f5/oGMsEyLeTZs.jpg" class="photo">
-                <input type="file" name="upload" value="upload" id="upload" accept="image/*">
-            </div>
-            <div class="div_photo">
-                <img src="https://pp.userapi.com/c636218/v636218955/3a3f5/oGMsEyLeTZs.jpg" class="photo">
-                <input type="file" name="upload" value="upload" id="upload" accept="image/*">
-            </div>
-             <div class="div_photo">
-                <img src="https://pp.userapi.com/c636218/v636218955/3a3f5/oGMsEyLeTZs.jpg" class="photo">
-                <input type="file" name="upload" value="upload" id="upload" accept="image/*">
-            </div>
-            <div class="div_photo">
-                <img src="https://pp.userapi.com/c636218/v636218955/3a3f5/oGMsEyLeTZs.jpg" class="photo">
-                <input type="file" name="upload" value="upload" id="upload" accept="image/*">
-            </div>
-        </form>
        <form action="/profile" method="post">
             <select name="edit" id='modifyuserlist' onchange="placeholder()">
                 <option value='1'> Login </option>
@@ -41,29 +17,28 @@
                 <option value='5'> Email </option>
             </select>
             <input type="text" name="changement" id='modifyuser'>
-            
-            <input type="submit" name="general" value="Modify">
+            <input type="submit" name="general" value="modifyuser">
         </form>
         <form action="/profile" method="post">
-            Sexual Orientation :
-             <select name="edit">
-                <option> none </option>
-                <option> Heterosexual </option>
-                <option> Bisexual </option>
-                <option> Bicurious </option>
-                <option> Homosexual </option>
-                <option> Pansexual </option>
-                <option> Demisexual </option>
-                <option> Heteronormative </option>
-                <option> Polyamorous </option>
-                <option> Grey Asexual </option>
-                <option> Asexual </option>
-                <option> Questioning </option>
-                <option> Other </option>
-                <option selected> Antoine ;)</option>
-            <input type="submit" name="orientation" value="Modify">
+        Sexual Orientation :
+         <select name="orientation">
+            <option> none </option>
+            <option> Heterosexual </option>
+            <option> Bisexual </option>
+            <option> Bicurious </option>
+            <option> Homosexual </option>
+            <option> Pansexual </option>
+            <option> Demisexual </option>
+            <option> Heteronormative </option>
+            <option> Polyamorous </option>
+            <option> Grey Asexual </option>
+            <option> Asexual </option>
+            <option> Questioning </option>
+            <option> Other </option>
+            <option selected> Antoine ;)</option>
+        </select>
+        <input type="submit" name="sub_orientation" value="modify">
         </form>
-    </div>
     <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
     <% if (typeof success !== 'undefined' && success) { %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
 </body></html>

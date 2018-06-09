@@ -67,12 +67,11 @@ server.get('/', function(req,res){
 })
 .get('/profile', function(req,res){
     ssn = req.session;
-    if (ssn.login === undefined)
+    if (typeof ssn.profile.login === undefined)
         res.render('login.ejs', {css: css, error: 'Please login to access your profile page'});
-    else {
-        con.query('SELECT * FROM `users` WHERE login = ?', [ssn.login], function (err, result) { if (err) throw err; 
-        res.render('profile.ejs', {css: css, error: 'none', profile: result[0]});
-}); } })
+    else 
+        res.render('profile.ejs', {css: css, error: 'none', profile: ssn.profile});
+})
 .get('/logout', function(req,res){
     ssn = req.session;
     req.session.destroy();

@@ -1,7 +1,7 @@
  <div id="head">
 	<a href="/"><img src="../title.png" id=title></a>
-	<% if (typeof ssn !== 'undefined' && typeof ssn.login !== 'undefined' && ssn.login) { %> 
-	<a href="/profile"><div class="login"><%- ssn.login %></div></a>
+	<% if (typeof ssn.profile !== 'undefined' && typeof ssn.profile.login !== 'undefined' && ssn.profile.login) { %> 
+	<a href="/profile"><div class="login"><%- ssn.profile.login %></div></a>
 	<a href="/logout"><div class="login register"> Logout </div></a>
 	<% } else { %>
 	<a href="/login"><div class="login"> Login </div></a>
