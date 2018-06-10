@@ -1,6 +1,3 @@
-if (typeof ssn.profile == undefined)
-    res.render('login.ejs', {css: css, error: 'Please login to access your profile page'})
-// cette fonction serra utile partout sur cette page!!! je suis un genie, en plus elle tiens sur 4 lignes ;)
 function updateuser(column, change)
 {
     var sql = 'UPDATE users SET ' + column + ' = ? WHERE id = ?'
@@ -8,8 +5,11 @@ function updateuser(column, change)
     ssn.profile[column] = change
     res.render('profile.ejs', {css: css, success: 'Your ' + column + ' was successfully changed', profile: ssn.profile})
 }
-
-if (req.body.edit && req.body.general === 'modifyuser')
+if (typeof ssn.profile == undefined)
+{
+    res.render('login.ejs', {css: css, error: 'Please login to access your profile page'})
+}
+else if (req.body.edit && req.body.general === 'Modify')
 {
 	if (req.body.changement == '' || req.body.changement.length <= '1' || typeof req.body.changement == undefined )
 		res.render('profile.ejs', {css: css, error: 'Please input something to edit your profile', profile: ssn.profile})
@@ -65,10 +65,24 @@ if (req.body.edit && req.body.general === 'modifyuser')
             res.render('profile.ejs', {css: css, error: 'Email must be valid', profile: ssn.profile})
 	}
 }
-
-
-if (req.body.orientation && req.body.sub_orientation === 'modify')
+else if (req.body.orientation && req.body.sub_orientation === 'Modify')
 {
-	console.log(req.body.orientation)
+    var change = eschtml(req.body.orientation) 
+	if (change !== 'Select Sexual Orientation')
+        updateuser('orientation', change)
+    else
+        res.render('profile.ejs', {css: css, success: 'Select an orientation to update', profile: ssn.profile})
 }
 
+else if (req.body.gender && req.body.sub_gender === 'Modify')
+{
+   var change = eschtml(req.body.gender) 
+    if (change !== 'Select Gender')
+        updateuser('gender', change)
+    else
+        res.render('profile.ejs', {css: css, success: 'Select a gender to update', profile: ssn.profile})
+}
+else
+{
+   res.render('index.ejs', {css: css})
+}

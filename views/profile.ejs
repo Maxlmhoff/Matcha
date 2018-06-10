@@ -17,28 +17,45 @@
                 <option value='5'> Email </option>
             </select>
             <input type="text" name="changement" id='modifyuser'>
-            <input type="text" name="confirm" placeholder=Confirm>
-            <input type="submit" name="general" value="modifyuser">
+            <input type="text" name="confirm" placeholder=Confirm id='confirm'>
+            <input type="submit" name="general" value="Modify" id="change" disabled="disabled">
         </form>
         <form action="/profile" method="post">
-        Sexual Orientation :
-         <select name="orientation">
-            <option> none </option>
-            <option> Heterosexual </option>
-            <option> Bisexual </option>
-            <option> Bicurious </option>
-            <option> Homosexual </option>
-            <option> Pansexual </option>
-            <option> Demisexual </option>
-            <option> Heteronormative </option>
-            <option> Polyamorous </option>
-            <option> Grey Asexual </option>
-            <option> Asexual </option>
-            <option> Questioning </option>
+            Sexual Orientation :
+             <select name="orientation">
+                <option> Select Sexual Orientation </option>
+                <option> Heterosexual </option>
+                <option> Bisexual </option>
+                <option> Bicurious </option>
+                <option> Homosexual </option>
+                <option> Pansexual </option>
+                <option> Demisexual </option>
+                <option> Heteronormative </option>
+                <option> Polyamorous </option>
+                <option> Grey Asexual </option>
+                <option> Asexual </option>
+                <option> Questioning </option>
+                <option> Other </option>
+            </select>
+            <input type="submit" name="sub_orientation" value="Modify">
+        </form>
+        <form action="/profile" method="post">
+        Your Gender :
+         <select name="gender">
+            <option> Select Gender </option>
+            <option> Male </option>
+            <option> Female </option>
+            <option> Trans Male </option>
+            <option> Trans Female </option>
+            <option> Agender </option>
+            <option> Cisgender </option>
+            <option> Genderfluid </option>
+            <option> Genderqueer </option>
+            <option> Intersex </option>
+            <option> Gender non-conforming </option>
             <option> Other </option>
-            <option selected> Antoine ;)</option>
         </select>
-        <input type="submit" name="sub_orientation" value="modify">
+        <input type="submit" name="sub_gender" value="Modify">
         </form>
     <% if (typeof error !== 'undefined' && error && error !== 'none') { 
     %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
@@ -47,6 +64,16 @@
 </body></html>
 
 <script>
+    change = document.getElementById('change');
+    modif = document.getElementById('modifyuser');
+    confirm = document.getElementById('confirm');
+    verif();
+    function verif() {
+    setTimeout(verif,500);
+    if (modif.value != "" && confirm.value != "")
+        change.disabled = false;
+    else
+        change.disabled = true; }
     window.onload = placeholder();
     function placeholder() {
         var s = document.getElementById("modifyuserlist").value;

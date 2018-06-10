@@ -36,9 +36,9 @@ con.connect(function(err) { if (err) throw err
         pass VARCHAR(255), \
         email VARCHAR(255), \
         confirmkey VARCHAR(10), \
-        sex INT DEFAULT 0, \
         confirm INT DEFAULT 0, \
-        orientation INT DEFAULT 0, \
+        gender VARCHAR(255), \
+        orientation VARCHAR(255), \
         bio VARCHAR(255), \
         popularity INT DEFAULT 0)`
 
