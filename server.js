@@ -78,17 +78,17 @@ server.get('/', function(req,res){
     res.redirect('/')
 })
 .post('/register', urlencodedParser, function(req,res){
-    eval(fs.readFileSync(__dirname + "/register.js")+'')
+    eval(fs.readFileSync(__dirname + "/back/register.js")+'')
 })
 .post('/profile', urlencodedParser, function(req,res){
-    eval(fs.readFileSync(__dirname + "/profile.js")+'')
+    eval(fs.readFileSync(__dirname + "/back/profile.js")+'')
 })
 .post('/login', urlencodedParser, function(req,res){
-    eval(fs.readFileSync(__dirname + "/login.js")+'')
+    eval(fs.readFileSync(__dirname + "/back/login.js")+'')
 })
 .post('/forgot', urlencodedParser, function(req,res){
-    eval(fs.readFileSync(__dirname + "/forgotpass.js")+'')
+    eval(fs.readFileSync(__dirname + "/back/forgotpass.js")+'')
 })
 .get('/confirm', urlencodedParser, function(req,res){
-    eval(fs.readFileSync(__dirname + "/confirm.js")+'')
+    eval(fs.readFileSync(__dirname + "/back/confirm.js")+'')
  })
