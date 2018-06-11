@@ -64,7 +64,6 @@ server.get('/', function(req,res){
     res.render('index.ejs')
 })
 .get('/login', function(req,res){
-    console.log(ssn.profile)
     res.render('login.ejs', {css: css})
 })
 .get('/register', function(req,res){
