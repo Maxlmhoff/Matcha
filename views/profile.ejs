@@ -8,17 +8,33 @@
 <body background=../background.png>
 <% include header.ejs %>
     <h2> Your profile </h2>
+    <div style='display:flex'>
        <form action="/new_img" method="post">
-            <!-- Pour le front, faudra pouvoir afficher les images uploader avec ces inputs, et si tu click dessus, sa les deletes :) -->
-             <input type=image src="empty.png">
-            <input type=image src="empty.png">
-            <input type=image src="empty.png">
-            <input type=image src="empty.png">
-            <input type=image src="empty.png"> 
-            <input type=image src="empty.png">
-            <input type=file name=image accept=image/* required>
+            <img src="<%- profile.img1 %>"><BR \>
+            <input type=file name=image1 accept=image/* required>
             <input type=submit name=upload value="Upload Image">
        </form>
+       <form action="/new_img" method="post">
+            <img src="<%- profile.img2 %>"><BR \>
+            <input type=file name=image2 accept=image/* required>
+            <input type=submit name=upload value="Upload Image">
+       </form>
+       <form action="/new_img" method="post">
+            <img src="<%- profile.img3 %>"><BR \>
+            <input type=file name=image3 accept=image/* required>
+            <input type=submit name=upload value="Upload Image">
+       </form>
+       <form action="/new_img" method="post">
+            <img src="<%- profile.img4 %>"><BR \>
+            <input type=file name=image4 accept=image/* required>
+            <input type=submit name=upload value="Upload Image">
+       </form>
+       <form action="/new_img" method="post">
+            <img src="<%- profile.img5 %>"><BR \>
+            <input type=file name=image5 accept=image/* required>
+            <input type=submit name=upload value="Upload Image">
+       </form>
+   </div>
        <form action="/profile" method="post">
             <select name="edit" id='modifyuserlist' onchange="placeholder()">
                 <option value='1'> Login </option>

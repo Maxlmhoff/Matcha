@@ -40,7 +40,11 @@ con.connect(function(err) { if (err) throw err
         gender VARCHAR(255), \
         orientation VARCHAR(255), \
         bio VARCHAR(255) DEFAULT '', \
-        popularity INT DEFAULT 0)`
+        img1 VARCHAR(255) DEFAULT 'empty.png', \
+        img2 VARCHAR(255) DEFAULT 'empty.png', \
+        img3 VARCHAR(255) DEFAULT 'empty.png', \
+        img4 VARCHAR(255) DEFAULT 'empty.png', \
+        img5 VARCHAR(255) DEFAULT 'empty.png')`
 
  con.query(sql, function (err, res) { if (err) throw err }) })
 
