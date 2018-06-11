@@ -28,7 +28,7 @@ var server = express()
 con.connect(function(err) { if (err) throw err
     con.query('CREATE DATABASE IF NOT EXISTS `matcha`', function (err) { if (err) throw err })
     con.query('USE `matcha`', function (err) { if (err) throw err })
-    var sql = `CREATE TABLE IF NOT EXISTS users ( \
+    var users = `CREATE TABLE IF NOT EXISTS users ( \
         id INT AUTO_INCREMENT PRIMARY KEY, \
         login VARCHAR(255), \
         firstname VARCHAR(255), \
@@ -45,8 +45,12 @@ con.connect(function(err) { if (err) throw err
         img3 VARCHAR(255) DEFAULT 'empty.png', \
         img4 VARCHAR(255) DEFAULT 'empty.png', \
         img5 VARCHAR(255) DEFAULT 'empty.png')`
+    con.query(users, function (err, res) { if (err) throw err })
 
- con.query(sql, function (err, res) { if (err) throw err }) })
+    var tags = `CREATE TABLE IF NOT EXISTS tags ( \
+         id INT, \
+         tag VARCHAR(255))`
+    con.query(tags, function (err, res) { if (err) throw err }) })
 
 server.use(express.static(__dirname + '/img'))
 server.use(ssn({ secret: 'Eloi has a beautiful secret', resave: true, saveUninitialized: true }))
@@ -54,31 +58,27 @@ server.use(bodyParser.urlencoded({ extended: true }))
 server.listen(8080)
 
 server.get('/', function(req,res){
-    ssn = req.session
     res.render('index.ejs', {css: css})
 })
 .get('/index', function(req, res) {
-    ssn = req.session
     res.render('index.ejs')
 })
 .get('/login', function(req,res){
-    ssn = req.session
+    console.log(ssn.profile)
     res.render('login.ejs', {css: css})
 })
 .get('/register', function(req,res){
-    ssn = req.session
     res.render('register.ejs', {css: css, error: 'none'})
 })
 .get('/profile', function(req,res){
-    ssn = req.session
     if (ssn.profile == undefined)
         res.render('login.ejs', {css: css, error: 'Please login to access your profile page'})
     else 
         res.render('profile.ejs', {css: css, error: 'none', profile: ssn.profile})
 })
 .get('/logout', function(req,res){
-    ssn = req.session
     req.session.destroy()
+    ssn = 0;
     res.redirect('/')
 })
 .post('/register', urlencodedParser, function(req,res){

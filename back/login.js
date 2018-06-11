@@ -14,6 +14,12 @@ if (req.body.login && req.body.pass)
                    {
                         ssn = req.session
                         ssn.profile = result[0]
+                        sql = 'SELECT * FROM `tags` WHERE id = ?'
+                        con.query(sql, [ssn.profile.id], function (err, result) {
+                          if (err) throw err
+                            i = 0;
+                            ssn.profile.tag = result
+                      })
                        res.render('login.ejs', {css: css, success: 'BRAVO TU ES CONNECTÉ !'})
                    }
                    else

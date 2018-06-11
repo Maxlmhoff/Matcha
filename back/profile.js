@@ -86,7 +86,27 @@ else if (req.body.bio && req.body.sub_bio === 'Submit')
     var change = eschtml(req.body.bio)
     updateuser('bio', change)
 }
+else if (req.body.newtag)
+{
+    var newtag = eschtml(req.body.newtag)
+    sql = 'SELECT * FROM `tags` WHERE id = ? AND tag = ?'
+    con.query(sql, [ssn.profile.id, newtag], function (err, result) { if (err) throw err
+        if (result.length === 0)
+        {
+            sql = 'INSERT INTO tags (tag, id) VALUES (?,?)'
+            con.query(sql, [newtag, ssn.profile.id], function (err, result) { if (err) throw err })
+            sql = 'SELECT * FROM `tags` WHERE id = ?'
+                    con.query(sql, [ssn.profile.id], function (err, result) {
+                      if (err) throw err
+                    ssn.profile.tag = result
+                res.render('profile.ejs', {css: css, successtag: 'Tag ajouté avec succés !', profile: ssn.profile})
+                  })
+        }
+        else
+            res.render('profile.ejs', {css: css, errortag: 'This tag already exists', profile: ssn.profile}) })
+}
 else
 {
    res.render('index.ejs', {css: css})
 }
+

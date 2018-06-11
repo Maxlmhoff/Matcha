@@ -95,18 +95,46 @@
     %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
     <% if (typeof success !== 'undefined' && success) { 
     %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
+    <div class="tags">
+        <h2>Ajouter des tags :</h2>
+    <form action="/profile" method="post">
+            <input type="text" name="newtag" id='newtag'>
+            <input type="submit" name="general" value="Ajouter" id="tagbutton" disabled="disabled">
+    </form>
+    <% if (typeof errortag !== 'undefined' && errortag && errortag !== 'none') { 
+    %> <div id=error><strong>Error: <%- errortag %></strong></div> <% } %>
+    <% if (typeof successtag !== 'undefined' && successtag) { 
+    %> <div id=success><strong>Success: <%- successtag %></strong></div> <% } %>
+
+        <h2> Your tags : </h2>
+       <%
+       if (typeof profile && profile.tag) { i = 0
+       while (profile.tag[i])
+         {
+            %><strong>#<%= profile.tag[i++].tag %></strong> | <%
+         }}
+         %>
+    </div>
 </body></html>
 <script>
+
     change = document.getElementById('change');
     modif = document.getElementById('modifyuser');
     confirm = document.getElementById('confirm');
+    tagbutton = document.getElementById('tagbutton');
+    newtag = document.getElementById('newtag');
     verif();
     function verif() {
     setTimeout(verif,500);
     if (modif.value != "" && confirm.value != "")
         change.disabled = false;
     else
-        change.disabled = true; }
+        change.disabled = true;
+    if (newtag.value != "")
+        tagbutton.disabled = false;
+    else
+        tagbutton.disabled = true; }
+
     window.onload = placeholder();
     function placeholder() {
         var s = document.getElementById("modifyuserlist").value;
