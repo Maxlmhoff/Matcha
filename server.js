@@ -13,7 +13,7 @@ var express = require('express')
     eschtml = require('htmlspecialchars')
     vm = require('vm')
     ssn = require('express-session')
-
+    formidable = require('formidable')
 
 // un commentaire ici
 var server = express()
@@ -39,7 +39,7 @@ con.connect(function(err) { if (err) throw err
         confirm INT DEFAULT 0, \
         gender VARCHAR(255), \
         orientation VARCHAR(255), \
-        bio VARCHAR(255), \
+        bio VARCHAR(255) DEFAULT '', \
         popularity INT DEFAULT 0)`
 
  con.query(sql, function (err, res) { if (err) throw err }) })
@@ -82,6 +82,9 @@ server.get('/', function(req,res){
 })
 .post('/profile', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/back/profile.js")+'')
+})
+.post('/new_img', urlencodedParser, function(req,res){
+    eval(fs.readFileSync(__dirname + "/back/new_img.js")+'')
 })
 .post('/login', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/back/login.js")+'')

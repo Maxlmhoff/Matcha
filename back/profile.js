@@ -73,7 +73,6 @@ else if (req.body.orientation && req.body.sub_orientation === 'Modify')
     else
         res.render('profile.ejs', {css: css, success: 'Select an orientation to update', profile: ssn.profile})
 }
-
 else if (req.body.gender && req.body.sub_gender === 'Modify')
 {
    var change = eschtml(req.body.gender) 
@@ -82,7 +81,7 @@ else if (req.body.gender && req.body.sub_gender === 'Modify')
     else
         res.render('profile.ejs', {css: css, success: 'Select a gender to update', profile: ssn.profile})
 }
-else if (req.body.bio && req.body.sub_bio === 'Modify')
+else if (req.body.bio && req.body.sub_bio === 'Submit')
 {
     var change = eschtml(req.body.bio)
     updateuser('bio', change)

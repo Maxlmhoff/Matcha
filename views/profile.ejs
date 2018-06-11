@@ -8,6 +8,17 @@
 <body background=../background.png>
 <% include header.ejs %>
     <h2> Your profile </h2>
+       <form action="/new_img" method="post">
+            <!-- Pour le front, faudra pouvoir afficher les images uploader avec ces inputs, et si tu click dessus, sa les deletes :) -->
+             <input type=image src="empty.png">
+            <input type=image src="empty.png">
+            <input type=image src="empty.png">
+            <input type=image src="empty.png">
+            <input type=image src="empty.png"> 
+            <input type=image src="empty.png">
+            <input type=file name=image accept=image/* required>
+            <input type=submit name=upload value="Upload Image">
+       </form>
        <form action="/profile" method="post">
             <select name="edit" id='modifyuserlist' onchange="placeholder()">
                 <option value='1'> Login </option>
@@ -16,8 +27,8 @@
                 <option value='4'> Password </option>
                 <option value='5'> Email </option>
             </select>
-            <input type="text" name="changement" id='modifyuser'>
-            <input type="text" name="confirm" placeholder=Confirm id='confirm'>
+            <input type="text" name="changement" id='modifyuser' required>
+            <input type="text" name="confirm" placeholder=Confirm id='confirm' required>
             <input type="submit" name="general" value="Modify" id="change" disabled="disabled">
         </form>
         <form action="/profile" method="post">
@@ -41,7 +52,7 @@
         </form>
         <form action="/profile" method="post">
         Your Gender :
-         <select name="gender">
+        <select name="gender">
             <option> Select Gender </option>
             <option> Male </option>
             <option> Female </option>
@@ -57,12 +68,18 @@
         </select>
         <input type="submit" name="sub_gender" value="Modify">
         </form>
+        <!--pour la bio faire du js pour le countdown des characteres
+        faut rester sur un maxlength de 200 sinon le sql part en couille -->
+        <form action="/profile" method="post">
+            Your Biography:
+            <input type=text name=bio placeholder='<%- profile.bio %>' maxlength=200 required>
+            <input type=submit name=sub_bio value=Submit>
+        </form>
     <% if (typeof error !== 'undefined' && error && error !== 'none') { 
     %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
     <% if (typeof success !== 'undefined' && success) { 
     %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
 </body></html>
-
 <script>
     change = document.getElementById('change');
     modif = document.getElementById('modifyuser');
