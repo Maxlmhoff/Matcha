@@ -82,6 +82,11 @@ else if (req.body.gender && req.body.sub_gender === 'Modify')
     else
         res.render('profile.ejs', {css: css, success: 'Select a gender to update', profile: ssn.profile})
 }
+else if (req.body.bio && req.body.sub_bio === 'Modify')
+{
+    var change = eschtml(req.body.bio)
+    updateuser('bio', change)
+}
 else
 {
    res.render('index.ejs', {css: css})
