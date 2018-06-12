@@ -15,7 +15,6 @@ function newimg()
 {
 	var form = new formidable.IncomingForm()
 	form.parse(req, function (err, field, files) { if (err) throw err;
-			//field is img1 img2 ect
 		if (field.img1 !== 'Upload Image' && field.img2 !== 'Upload Image' && field.img3 !== 'Upload Image' && field.img4 !== 'Upload Image' && field.img5 !== 'Upload Image')
 		{
 			res.render('profile.ejs', {css: css, error: 'A server error occured', profile: ssn.profile});
@@ -40,9 +39,9 @@ function newimg()
 			i++
 		}
 		var oldpath = files.file.path;
-	     	newpath = __dirname + '/img/users/' + name;
+	     	newpath = __dirname + '/img/users/' + ssn.profile.id + '/' + name;
 	     	fs.readFile(oldpath, function (err, data) { if (err) throw err; 
 	     	fs.writeFile(newpath, data, function (err) { if (err) throw err; }); });
-	     	updateuser(name, '/users/' + name);
+	     	updateuser(name, '/users/' + ssn.profile.id + '/' + name);
 	});
 }

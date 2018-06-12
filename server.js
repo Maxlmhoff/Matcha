@@ -64,7 +64,10 @@ server.get('/', function(req,res){
     res.render('index.ejs')
 })
 .get('/login', function(req,res){
-    res.render('login.ejs', {css: css})
+    if (ssn.profile == undefined)
+        res.render('login.ejs', {css: css})
+    else 
+        res.render('profile.ejs', {css: css, error: 'none', profile: ssn.profile})
 })
 .get('/register', function(req,res){
     res.render('register.ejs', {css: css, error: 'none'})

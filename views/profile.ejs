@@ -5,51 +5,63 @@
     <title>Your Profile</title>
      <%- css.style %>
 </head>     
-<body background=../background.png>
+<body background=../background2.png>
 <% include header.ejs %>
-    <h2> Your profile </h2>
-    <div style='display:flex'>
-       <form action="/new_img" method="post">
-            <img src="<%- profile.img1 %>"><BR \>
-            <input type=file name=image1 accept=image/* required>
-            <input type=submit name=upload value="Upload Image">
+<% if (typeof error !== 'undefined' && error && error !== 'none') { 
+    %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
+    <% if (typeof success !== 'undefined' && success) { 
+    %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
+    <h1 style="color:darkviolet;"> Your profile </h1>
+    <div class="profile">
+        <h3>Your pictures</h3>
+    <div class="pictures">
+       <form action="/new_img" method="post" enctype="multipart/form-data">
+            <img src="<%- profile.img1 %>" width="300" height="200"><BR \>
+            <input type=file name=file accept=".jpg, .jpeg, .png" required>
+            <input type=submit name=img1 value="Upload Image">
        </form>
-       <form action="/new_img" method="post">
-            <img src="<%- profile.img2 %>"><BR \>
-            <input type=file name=image2 accept=image/* required>
-            <input type=submit name=upload value="Upload Image">
+       <form action="/new_img" method="post" enctype="multipart/form-data">
+            <img src="<%- profile.img2 %>" width="300" height="200"><BR \>
+            <input type=file name=file accept=".jpg, .jpeg, .png" required>
+            <input type=submit name=img2 value="Upload Image">
        </form>
-       <form action="/new_img" method="post">
-            <img src="<%- profile.img3 %>"><BR \>
-            <input type=file name=image3 accept=image/* required>
-            <input type=submit name=upload value="Upload Image">
+       <form action="/new_img" method="post" enctype="multipart/form-data">
+            <img src="<%- profile.img3 %>" width="300" height="200"><BR \>
+            <input type=file name=file accept=".jpg, .jpeg, .png" required>
+            <input type=submit name=img3 value="Upload Image">
        </form>
-       <form action="/new_img" method="post">
-            <img src="<%- profile.img4 %>"><BR \>
-            <input type=file name=image4 accept=image/* required>
-            <input type=submit name=upload value="Upload Image">
+       <form action="/new_img" method="post" enctype="multipart/form-data">
+            <img src="<%- profile.img4 %>" width="300" height="200"><BR \>
+            <input type=file name=file accept=".jpg, .jpeg, .png" required>
+            <input type=submit name=img4 value="Upload Image">
        </form>
-       <form action="/new_img" method="post">
-            <img src="<%- profile.img5 %>"><BR \>
-            <input type=file name=image5 accept=image/* required>
-            <input type=submit name=upload value="Upload Image">
+       <form action="/new_img" method="post" enctype="multipart/form-data">
+            <img src="<%- profile.img5 %>" width="300" height="200"><BR \>
+            <input type=file name=file accept=".jpg, .jpeg, .png" required>
+            <input type=submit name=img5 value="Upload Image">
        </form>
    </div>
+   <h3>Your account</h3>
+   <div class="account">
        <form action="/profile" method="post">
-            <select name="edit" id='modifyuserlist' onchange="placeholder()">
+            <select class="profilebox" name="edit" id='modifyuserlist' onchange="placeholder()">
                 <option value='1'> Login </option>
                 <option value='2'> Firstname </option>
                 <option value='3'> Lastname </option>
                 <option value='4'> Password </option>
                 <option value='5'> Email </option>
             </select>
-            <input type="text" name="changement" id='modifyuser' required>
-            <input type="text" name="confirm" placeholder=Confirm id='confirm' required>
-            <input type="submit" name="general" value="Modify" id="change" disabled="disabled">
+            <input class="profilebox" type="text" name="changement" id='modifyuser' required>
+            <input class="profilebox" type="text" name="confirm" placeholder=Confirm id='confirm' required>
+            <input class="profilebutton" type="submit" name="general" value="Modify" id="change" disabled="disabled">
         </form>
+
+    </div>
+    <h3>Characteristics</h3>
+    <div class="caracs">
         <form action="/profile" method="post">
             Sexual Orientation :
-             <select name="orientation">
+             <select class="profilebox" name="orientation">
                 <option> Select Sexual Orientation </option>
                 <option> Heterosexual </option>
                 <option> Bisexual </option>
@@ -64,11 +76,11 @@
                 <option> Questioning </option>
                 <option> Other </option>
             </select>
-            <input type="submit" name="sub_orientation" value="Modify">
+            <input class="profilebutton"  type="submit" name="sub_orientation" value="Modify">
         </form>
         <form action="/profile" method="post">
         Your Gender :
-        <select name="gender">
+        <select class="profilebox" name="gender">
             <option> Select Gender </option>
             <option> Male </option>
             <option> Female </option>
@@ -82,39 +94,36 @@
             <option> Gender non-conforming </option>
             <option> Other </option>
         </select>
-        <input type="submit" name="sub_gender" value="Modify">
+        <input class="profilebutton" type="submit" name="sub_gender" value="Modify">
         </form>
         <!--pour la bio faire du js pour le countdown des characteres
         faut rester sur un maxlength de 200 sinon le sql part en couille -->
+        <div class="bio">
+        Your Biography:
         <form action="/profile" method="post">
-            Your Biography:
-            <input type=text name=bio placeholder='<%- profile.bio %>' maxlength=200 required>
-            <input type=submit name=sub_bio value=Submit>
-        </form>
-    <% if (typeof error !== 'undefined' && error && error !== 'none') { 
-    %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
-    <% if (typeof success !== 'undefined' && success) { 
-    %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
+            <textarea class="profilebigbox" type=text name=bio placeholder='Your biography' maxlength=200 required><%- profile.bio %></textarea>
+            <input class="profilebutton" type=submit name=sub_bio value="Update Biography">
+        </form></div>
+    
+</div>
+<h3>Tags</h3>
     <div class="tags">
-        <h2>Ajouter des tags :</h2>
     <form action="/profile" method="post">
-            <input type="text" name="newtag" id='newtag'>
-            <input type="submit" name="general" value="Ajouter" id="tagbutton" disabled="disabled">
-    </form>
-    <% if (typeof errortag !== 'undefined' && errortag && errortag !== 'none') { 
-    %> <div id=error><strong>Error: <%- errortag %></strong></div> <% } %>
-    <% if (typeof successtag !== 'undefined' && successtag) { 
-    %> <div id=success><strong>Success: <%- successtag %></strong></div> <% } %>
-
-        <h2> Your tags : </h2>
+            <input class="profilebox" type="text" name="newtag" id='newtag'>
+            <input class="profilebutton" type="submit" name="general" value="Ajouter" id="tagbutton" disabled="disabled">
+    </form><br/><br/>
+<div class="actualtags">
        <%
        if (typeof profile && profile.tag) { i = 0
        while (profile.tag[i])
          {
-            %><strong>#<%= profile.tag[i++].tag %></strong> | <%
+            %>
+            <div class="tag"><form action="deletetag" method="post"><strong>#<%= profile.tag[i++].tag %></strong><input type="image" src="croix.svg" id="buttondeletetag"></form></div><%
          }}
          %>
+     </div>
     </div>
+</div>
 </body></html>
 <script>
 
@@ -145,8 +154,17 @@
         else if (s == '3')
             var i = '<%- profile.lastname %>'
         else if (s == '4')
+        {
             var i = 'New Password'
+            modif.type = "Password";
+            confirm.type = "Password";
+        }
         else if (s == '5')
             var i = '<%- profile.email %>'
+        if (s != '4')
+        {
+            modif.type = "text";
+            confirm.type = "text";
+        }
         document.getElementById("modifyuser").placeholder = i; }
 </script>

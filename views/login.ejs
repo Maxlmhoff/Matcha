@@ -16,15 +16,16 @@
             <input type="password" class='user' placeholder="Passwd" name="pass">
             <input type="submit" class='user userinput' value="login">
         </form>
-        <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
-        <% if (typeof success !== 'undefined' && success) { %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
+        <% if (typeof error !== 'undefined' && error && error !== 'none') { %> <div id=errorlog><strong>Error: <%- error %></strong></div> <% } %>
+        <% if (typeof success !== 'undefined' && success) { %> <div id=successlog><strong>Success: <%- success %></strong></div> <% } %>
     </div>
     <div id="forgot"><h3>Forgot yor password ?</h3>
             <form action="forgot" method="post">
                 <input type="email" class='user' name="email" placeholder="Email"><br/>
                 <input type="submit" class='user userinput' name="submit" value="Reinitialiser" style="font-size : 20px; color:#4d4d4d;"></form>
-            <% if (typeof error2 !== 'undefined' && error2 && error2 !== 'none') { %> <div id=error><strong>Error: <%- error2 %></strong></div> <% } %>
-            <% if (typeof success2 !== 'undefined' && success2) { %> <div id=success><strong>Success: <%- success2 %></strong></div> <% }%>
+            <% if (typeof error2 !== 'undefined' && error2 && error2 !== 'none') { %> <div id=errorlog><strong>Error: <%- error2 %></strong></div> <% } %>
+            <% if (typeof success2 !== 'undefined' && success2) { %> <div id=successlog><strong>Success: <%- success2 %></strong></div> <% }%>
     </div>
+    <% include footer.ejs %>
     </body>
 </html>
