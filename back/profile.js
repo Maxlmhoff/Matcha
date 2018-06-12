@@ -5,29 +5,29 @@ function updateuser(column, change)
     ssn.profile[column] = change
     res.render('profile.ejs', {css: css, success: 'Your ' + column + ' was successfully changed', profile: ssn.profile})
 }
+function updateuserifexists(column, change)
+{
+    sql = 'SELECT * FROM `users` WHERE '+ column +' = ?'
+    con.query(sql, [change], function (err, result) { if (err) throw err 
+        if (result.length === 0)
+            updateuser(column, change)
+        else
+            res.render('profile.ejs', {css: css, error: 'Sorry, this login already exists', profile: ssn.profile})
+    })
+}
 if (typeof ssn.profile == undefined)
 {
     res.render('login.ejs', {css: css, error: 'Please login to access your profile page'})
 }
 else if (req.body.edit && req.body.general === 'Modify')
 {
+    var change = eschtml(req.body.changement)
 	if (req.body.changement == '' || req.body.changement.length <= '1' || typeof req.body.changement == undefined )
 		res.render('profile.ejs', {css: css, error: 'Please input something to edit your profile', profile: ssn.profile})
-    
-    var change = eschtml(req.body.changement)
-    if (change !== eschtml(req.body.confirm))
+    else if (change !== eschtml(req.body.confirm))
         res.render('profile.ejs', {css: css, error: 'Your input and confirmation were different', profile: ssn.profile})
-
-	if (req.body.edit === '1')
-	{
-		sql = 'SELECT * FROM `users` WHERE login = ?'
-		con.query(sql, [change], function (err, result) { if (err) throw err 
-    		if (result.length === 0)
-	    		updateuser('login', change)
-			else
-				res.render('profile.ejs', {css: css, error: 'Sorry, this login already exists', profile: ssn.profile})
-		})
-	}
+	else if (req.body.edit === '1')
+		updateuserifexists('login', change)
 	else if (req.body.edit === '2')
         updateuser('firstname', change)
 	else if (req.body.edit === '3')
@@ -52,15 +52,7 @@ else if (req.body.edit && req.body.general === 'Modify')
 	else if (req.body.edit === '5')
 	{
 		if (validator.isEmail(change))
-        {
-    		sql = 'SELECT * FROM `users` WHERE email = ?'
-    		con.query(sql, [change], function (err, result) { if (err) throw err 
-        		if (result.length === 0)
-    	    		updateuser('email', change)
-    			else
-    				res.render('profile.ejs', {css: css, error: 'Sorry, this email already exists', profile: ssn.profile})
-    		})
-        }
+    		updateuserifexists('email', change)
         else
             res.render('profile.ejs', {css: css, error: 'Email must be valid', profile: ssn.profile})
 	}
