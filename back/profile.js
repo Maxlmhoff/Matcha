@@ -88,11 +88,11 @@ else if (req.body.newtag)
             sql = 'INSERT INTO tags (tag, id) VALUES (?,?)'
             con.query(sql, [newtag, ssn.profile.id], function (err, result) { if (err) throw err })
             sql = 'SELECT * FROM `tags` WHERE id = ?'
-                    con.query(sql, [ssn.profile.id], function (err, result) {
-                      if (err) throw err
-                    ssn.profile.tag = result
+            con.query(sql, [ssn.profile.id], function (err, result) {
+                if (err) throw err
+                ssn.profile.tag = result
                 res.render('profile.ejs', {css: css, successtag: 'Tag ajouté avec succés !', profile: ssn.profile})
-                  })
+            })
         }
         else
             res.render('profile.ejs', {css: css, errortag: 'This tag already exists', profile: ssn.profile}) })
