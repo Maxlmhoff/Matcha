@@ -89,7 +89,7 @@ else if (req.body.bio && req.body.sub_bio === 'Update Biography')
 else if (req.body.newtag)
 {
     var newtag = eschtml(req.body.newtag)
-    if (newtag.length < 255)
+    if (newtag.length < 41)
     {
         sql = 'SELECT * FROM `tags` WHERE user_id = ? AND tag = ?'
         con.query(sql, [ssn.profile.id, newtag], function (err, result) { if (err) throw err
