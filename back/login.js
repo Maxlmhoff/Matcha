@@ -1,4 +1,14 @@
-if (req.body.login && req.body.pass)
+if (req.body.table)
+{
+var table = JSON.parse(req.body.table)
+    location = 'Continent : ' + table.continent_name + ' | Country : ' + table.country_name + 
+  ' | Region : ' + table.region_name + ' | City : ' + table.city + ' | Postal Code : ' + table.zip
+
+    con.query('UPDATE users SET location = ? WHERE id = ?', [location, ssn.profile.id], function (err) { if (err) throw err })
+    ssn.profile.location = location;
+    console.log(location)
+}
+else if (req.body.login && req.body.pass)
 {
     sql = 'SELECT * FROM `users` WHERE login = ?'
     variables = [req.body.login]
@@ -20,10 +30,10 @@ if (req.body.login && req.body.pass)
                             i = 0;
                             ssn.profile.tag = result
                       })
-                       res.render('login.ejs', {css: css, success: 'BRAVO TU ES CONNECTÉ !'})
+                       res.render('login.ejs', {css: css, success: 'CONGRADULATION YOU ARE LOGGED IN'})
                    }
                    else
-                       res.render('login.ejs', {css: css, error: 'Veuillez confirmer votre compte par email'})
+                       res.render('login.ejs', {css: css, error: 'A confirmation e-mail has been sent'})
                }
                else
                    res.render('login.ejs', {css: css, error: 'ERREUR DE CONNEXION ! (invalid pass)'})

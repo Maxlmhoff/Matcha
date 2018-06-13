@@ -1,4 +1,4 @@
-// les requires
+// requires
 var express = require('express')
     mysql = require('mysql')
     compression = require('compression')
@@ -15,7 +15,7 @@ var express = require('express')
     ssn = require('express-session')
     formidable = require('formidable')
 
-// un commentaire ici
+// others
 var server = express()
     urlencodedParser = bodyParser.urlencoded({ extended: false })
     css = { style : fs.readFileSync('./style.css','utf8') }
@@ -28,6 +28,7 @@ var server = express()
 con.connect(function(err) { if (err) throw err
     con.query('CREATE DATABASE IF NOT EXISTS `matcha`', function (err) { if (err) throw err })
     con.query('USE `matcha`', function (err) { if (err) throw err })
+    con.query('SET NAMES utf8mb4', function (err) { if (err) throw err })
     var users = `CREATE TABLE IF NOT EXISTS users ( \
         id INT AUTO_INCREMENT PRIMARY KEY, \
         login VARCHAR(255), \
@@ -40,6 +41,8 @@ con.connect(function(err) { if (err) throw err
         gender VARCHAR(255), \
         orientation VARCHAR(255), \
         bio TEXT, \
+        score INT DEFAULT 0, \
+        location TEXT, \
         img1 VARCHAR(255) DEFAULT 'empty.png', \
         img2 VARCHAR(255) DEFAULT 'empty.png', \
         img3 VARCHAR(255) DEFAULT 'empty.png', \
