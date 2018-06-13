@@ -39,7 +39,7 @@ con.connect(function(err) { if (err) throw err
         confirm INT DEFAULT 0, \
         gender VARCHAR(255), \
         orientation VARCHAR(255), \
-        bio VARCHAR(255) DEFAULT '', \
+        bio TEXT, \
         img1 VARCHAR(255) DEFAULT 'empty.png', \
         img2 VARCHAR(255) DEFAULT 'empty.png', \
         img3 VARCHAR(255) DEFAULT 'empty.png', \
@@ -48,8 +48,9 @@ con.connect(function(err) { if (err) throw err
     con.query(users, function (err, res) { if (err) throw err })
 
     var tags = `CREATE TABLE IF NOT EXISTS tags ( \
-         id INT, \
-         tag VARCHAR(255))`
+        id INT AUTO_INCREMENT PRIMARY KEY, \
+        user_id INT, \
+        tag VARCHAR(255))`
     con.query(tags, function (err, res) { if (err) throw err }) })
 
 server.use(express.static(__dirname + '/img'))
@@ -97,6 +98,9 @@ server.get('/', function(req,res){
 })
 .post('/forgot', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/back/forgotpass.js")+'')
+})
+.post('/deletetag', urlencodedParser, function(req,res){
+    eval(fs.readFileSync(__dirname + "/back/deletetag.js")+'')
 })
 .get('/confirm', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/back/confirm.js")+'')

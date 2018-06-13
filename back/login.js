@@ -14,7 +14,7 @@ if (req.body.login && req.body.pass)
                    {
                         ssn = req.session
                         ssn.profile = result[0]
-                        sql = 'SELECT * FROM `tags` WHERE id = ?'
+                        sql = 'SELECT * FROM `tags` WHERE user_id = ?'
                         con.query(sql, [ssn.profile.id], function (err, result) {
                           if (err) throw err
                             i = 0;

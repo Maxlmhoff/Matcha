@@ -62,7 +62,10 @@
         <form action="/profile" method="post">
             Sexual Orientation :
              <select class="profilebox" name="orientation">
+                <% if (!profile.orientation) { %>
                 <option> Select Sexual Orientation </option>
+                <% } else { %>
+                <option><%- profile.orientation %> </option><% } %>
                 <option> Heterosexual </option>
                 <option> Bisexual </option>
                 <option> Bicurious </option>
@@ -81,7 +84,10 @@
         <form action="/profile" method="post">
         Your Gender :
         <select class="profilebox" name="gender">
+            <% if (!profile.gender) { %>
             <option> Select Gender </option>
+            <% } else { %>
+            <option><%- profile.gender %> </option><% } %>
             <option> Male </option>
             <option> Female </option>
             <option> Trans Male </option>
@@ -96,29 +102,28 @@
         </select>
         <input class="profilebutton" type="submit" name="sub_gender" value="Modify">
         </form>
-        <!--pour la bio faire du js pour le countdown des characteres
-        faut rester sur un maxlength de 200 sinon le sql part en couille -->
         <div class="bio">
         Your Biography:
         <form action="/profile" method="post">
-            <textarea class="profilebigbox" type=text name=bio placeholder='Your biography' maxlength=200 required><%- profile.bio %></textarea>
+            <textarea class="profilebigbox" type=text name=bio placeholder='Your biography' maxlength=60000 required><%- profile.bio %></textarea>
             <input class="profilebutton" type=submit name=sub_bio value="Update Biography">
         </form></div>
     
 </div>
 <h3>Tags</h3>
     <div class="tags">
+        <div class="addtag">
     <form action="/profile" method="post">
             <input class="profilebox" type="text" name="newtag" id='newtag'>
             <input class="profilebutton" type="submit" name="general" value="Ajouter" id="tagbutton" disabled="disabled">
-    </form><br/><br/>
+    </form></div>
 <div class="actualtags">
-       <%
+       <% 
        if (typeof profile && profile.tag) { i = 0
        while (profile.tag[i])
          {
             %>
-            <div class="tag"><form action="deletetag" method="post"><strong>#<%= profile.tag[i++].tag %></strong><input type="image" src="croix.svg" id="buttondeletetag"></form></div><%
+            <div class="tag"><form action="/profile" method="post"><strong>#<%= profile.tag[i].tag %></strong><input type="image" src="croix.svg" id="buttondeletetag" name="deltag" value="<%= profile.tag[i++].id %>"></form></div><%
          }}
          %>
      </div>

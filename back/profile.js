@@ -71,7 +71,7 @@ else if (req.body.orientation && req.body.sub_orientation === 'Modify')
 	if (change !== 'Select Sexual Orientation')
         updateuser('orientation', change)
     else
-        res.render('profile.ejs', {css: css, success: 'Select an orientation to update', profile: ssn.profile})
+        res.render('profile.ejs', {css: css, error: 'Select an orientation to update', profile: ssn.profile})
 }
 else if (req.body.gender && req.body.sub_gender === 'Modify')
 {
@@ -79,9 +79,9 @@ else if (req.body.gender && req.body.sub_gender === 'Modify')
     if (change !== 'Select Gender')
         updateuser('gender', change)
     else
-        res.render('profile.ejs', {css: css, success: 'Select a gender to update', profile: ssn.profile})
+        res.render('profile.ejs', {css: css, error: 'Select a gender to update', profile: ssn.profile})
 }
-else if (req.body.bio && req.body.sub_bio === 'Submit')
+else if (req.body.bio && req.body.sub_bio === 'Update Biography')
 {
     var change = eschtml(req.body.bio)
     updateuser('bio', change)
@@ -89,21 +89,42 @@ else if (req.body.bio && req.body.sub_bio === 'Submit')
 else if (req.body.newtag)
 {
     var newtag = eschtml(req.body.newtag)
-    sql = 'SELECT * FROM `tags` WHERE id = ? AND tag = ?'
-    con.query(sql, [ssn.profile.id, newtag], function (err, result) { if (err) throw err
-        if (result.length === 0)
-        {
-            sql = 'INSERT INTO tags (tag, id) VALUES (?,?)'
-            con.query(sql, [newtag, ssn.profile.id], function (err, result) { if (err) throw err })
-            sql = 'SELECT * FROM `tags` WHERE id = ?'
-                    con.query(sql, [ssn.profile.id], function (err, result) {
-                      if (err) throw err
+    if (newtag.length < 255)
+    {
+        sql = 'SELECT * FROM `tags` WHERE user_id = ? AND tag = ?'
+        con.query(sql, [ssn.profile.id, newtag], function (err, result) { if (err) throw err
+            if (result.length === 0)
+            {
+                sql = 'INSERT INTO tags (tag, user_id) VALUES (?,?)'
+                con.query(sql, [newtag, ssn.profile.id], function (err, result) { if (err) throw err })
+                sql = 'SELECT * FROM `tags` WHERE user_id = ?'
+                        con.query(sql, [ssn.profile.id], function (err, result) {
+                          if (err) throw err
+                        ssn.profile.tag = result
+                    res.render('profile.ejs', {css: css, success: 'Tag ajouté avec succés !', profile: ssn.profile})
+                      })
+            }
+            else
+                res.render('profile.ejs', {css: css, error: 'This tag already exists', profile: ssn.profile}) })
+    }
+    else
+        res.render('profile.ejs', {css: css, error: 'This tag is too long', profile: ssn.profile})
+}
+else if (req.body.deltag)
+{
+    sql = 'DELETE FROM `tags` WHERE user_id = ? AND id = ?'
+        con.query(sql, [ssn.profile.id, req.body.deltag], function (err, result) { if (err) throw err
+            if (result.length !== 0)
+            {
+                sql = 'SELECT * FROM tags WHERE user_id = ?'
+                con.query(sql, [ssn.profile.id], function (err, result) { if (err) throw err
                     ssn.profile.tag = result
-                res.render('profile.ejs', {css: css, success: 'Tag ajouté avec succés !', profile: ssn.profile})
-                  })
-        }
-        else
-            res.render('profile.ejs', {css: css, error: 'This tag already exists', profile: ssn.profile}) })
+                    res.render('profile.ejs', {css: css, success: 'Tag supprimé avec succés !', profile: ssn.profile})
+                })
+                        
+            }
+            else
+                res.render('profile.ejs', {css: css, error: 'This tag can\'t be delete', profile: ssn.profile}) })
 }
 else
 {
