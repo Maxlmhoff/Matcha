@@ -5,15 +5,28 @@
     <title>Your Profile</title>
      <%- css.style %>
 </head>     
-<body background=../background2.png>
+<body id="pageprofil">
 <% include header.ejs %>
-<% if (typeof error !== 'undefined' && error && error !== 'none') { 
+<div id="truc"><% if (typeof error !== 'undefined' && error && error !== 'none') { 
     %> <div id=error><strong>Error: <%- error %></strong></div> <% } %>
     <% if (typeof success !== 'undefined' && success) { 
     %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
-    <h1 style="color:darkviolet;"> Your profile </h1>
+</div>
+    <h1 id="ypro"> Your profile </h1>
     <div class="profile">
-        <h3>Your pictures</h3>
+        <h2>Score</h3>
+    <div class="score">
+        <i>Your actual score on Find Your Peer :</i> <div id="sc"><strong><%- profile.score %></strong></div>
+    </div>
+       <h2>Location</h2>
+    <div class="location">
+        <i>Your actual location :</i> <strong><%- profile.location %></strong><br/><hr/>
+        <label><span style="margin-right: 10px;"> Show your location ? </span>
+            <input type="checkbox" name="checkboxName" class="checklocation"/>
+            <div class="switch <% if (profile.showlocation === 1) { %> switchOn <% } %>"></div>
+        </label>
+    </div>
+        <h2>Pictures</h2>
     <div class="pictures">
        <form action="/new_img" method="post" enctype="multipart/form-data">
             <img src="<%- profile.img1 %>" width="300" height="200"><BR \>
@@ -41,7 +54,8 @@
             <input type=submit name=img5 value="Upload Image">
        </form>
    </div>
-   <h3>Your account</h3>
+
+   <h2>Account</h2>
    <div class="account">
        <form action="/profile" method="post">
             <select class="profilebox" name="edit" id='modifyuserlist' onchange="placeholder()">
@@ -57,7 +71,7 @@
         </form>
 
     </div>
-    <h3>Characteristics</h3>
+    <h2>Characteristics</h2>
     <div class="caracs">
         <form action="/profile" method="post">
             Sexual Orientation :
@@ -110,7 +124,7 @@
         </form></div>
     
 </div>
-<h3>Tags</h3>
+<h2>Tags</h2>
     <div class="tags">
         <div class="addtag">
     <form action="/profile" method="post">
@@ -130,6 +144,27 @@
     </div>
 </div>
 </body></html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function()
+{
+$('.switch').click(function()
+{
+    $(this).toggleClass("switchOn");
+    $.ajax({
+        type: "POST",
+        url: "profile",
+        data: {
+            switch: $(this).hasClass("switchOn")
+        },
+        success: function() {
+            $("#truc").html("<div id='success'><strong>Location changed</strong></div>");
+        }
+    });
+});
+ 
+});
+</script>
 <script>
 
     change = document.getElementById('change');

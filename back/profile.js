@@ -126,6 +126,25 @@ else if (req.body.deltag)
             else
                 res.render('profile.ejs', {css: css, error: 'This tag can\'t be delete', profile: ssn.profile}) })
 }
+else if (req.body.switch)
+{
+    if (req.body.switch === 'false')
+    {
+        sql = 'UPDATE users SET showlocation = ? WHERE id = ?'
+        con.query(sql, [0, ssn.profile.id], function (err, result) { if (err) throw err
+            ssn.profile.showlocation = 0
+            res.render('profile.ejs', {css: css, success: 'Show Location desactived !', profile: ssn.profile})
+        })
+    }
+    else if (req.body.switch === 'true')
+    {
+        sql = 'UPDATE users SET showlocation = ? WHERE id = ?'
+        con.query(sql, [1, ssn.profile.id], function (err, result) { if (err) throw err
+            ssn.profile.showlocation = 1
+            res.render('profile.ejs', {css: css, success: 'Show Location actived !', profile: ssn.profile})
+        })
+    }
+}
 else
 {
    res.render('index.ejs', {css: css})

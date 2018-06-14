@@ -43,6 +43,7 @@ con.connect(function(err) { if (err) throw err
         bio TEXT, \
         score INT DEFAULT 0, \
         location TEXT, \
+        showlocation INT DEFAULT 1, \
         img1 VARCHAR(255) DEFAULT 'empty.png', \
         img2 VARCHAR(255) DEFAULT 'empty.png', \
         img3 VARCHAR(255) DEFAULT 'empty.png', \

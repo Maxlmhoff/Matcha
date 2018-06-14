@@ -6,7 +6,6 @@ var table = JSON.parse(req.body.table)
 
     con.query('UPDATE users SET location = ? WHERE id = ?', [location, ssn.profile.id], function (err) { if (err) throw err })
     ssn.profile.location = location;
-    console.log(location)
 }
 else if (req.body.login && req.body.pass)
 {
