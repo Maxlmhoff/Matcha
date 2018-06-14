@@ -11,14 +11,12 @@ if (typeof ssn.profile == undefined)
 }
 else if (req.body.edit && req.body.general === 'Modify')
 {
-	if (req.body.changement == '' || req.body.changement.length <= '1' || typeof req.body.changement == undefined )
-		res.render('profile.ejs', {css: css, error: 'Please input something to edit your profile', profile: ssn.profile})
-    
     var change = eschtml(req.body.changement)
-    if (change !== eschtml(req.body.confirm))
+	if (req.body.changement == '' || req.body.changement.length < '1' || typeof req.body.changement == undefined )
+		res.render('profile.ejs', {css: css, error: 'Please input something to edit your profile', profile: ssn.profile})
+    else if (change !== eschtml(req.body.confirm))
         res.render('profile.ejs', {css: css, error: 'Your input and confirmation were different', profile: ssn.profile})
-
-	if (req.body.edit === '1')
+	else if (req.body.edit === '1')
 	{
 		sql = 'SELECT * FROM `users` WHERE login = ?'
 		con.query(sql, [change], function (err, result) { if (err) throw err 
@@ -44,7 +42,7 @@ else if (req.body.edit && req.body.general === 'Modify')
         	res.render('profile.ejs', {css: css, error: 'Password must contain an uppercase', profile: ssn.profile})
         else
         {
-            bcrypt.hash(change, 10, function(erroo, hash) { if (erro) throw erro
+            bcrypt.hash(change, 10, function(erroo, hash) { if (erro) throw erroo
           	updateuser('pass', hash)
             })
         }
