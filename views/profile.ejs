@@ -23,7 +23,7 @@
         <i>Your actual location :</i> <strong><%- profile.location %></strong><br/><hr/>
         <label><span style="margin-right: 10px;"> Show your location ? </span>
             <input type="checkbox" name="checkboxName" class="checklocation"/>
-            <div class="switch <% if (profile.showlocation === 1) { %> switchOn <% } %>"></div>
+            <div id="switch" class="switch <% if (profile.showlocation === 1) { %> switchOn <% } %>"></div>
         </label>
     </div>
         <h2>Pictures</h2>
@@ -164,8 +164,8 @@ $('.switch').click(function()
             switch: $(this).hasClass("switchOn")
         },
         success: function() {
-                $("#truc").html("<div id='success'><strong>Location changed</strong></div>");
-            
+                $("#truc").html("<div id='success'><strong>Success: Location preference updated</strong></div>");
+
         }
     });
 });

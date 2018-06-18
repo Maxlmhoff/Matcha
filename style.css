@@ -386,7 +386,10 @@ left: 15px !important;
 }
 
 /* PUBLIC PROFILE */
-
+.inlineblock
+{
+	display: inline-block;
+}
 .grey
 {
     background-color: rgba(144,144,144,0.8);
@@ -405,19 +408,34 @@ left: 15px !important;
 {
     width:30vw;
     height:20vw;
+    display: inline-block;
+}
+.img1
+{
+	border:1px solid black;
+	text-align: center;
+	box-shadow: 0px 0px 5px 5px black;
+	border-radius: 5px;
 }
 .left
 {
     position:absolute;
     right:0;
-    height:83vh;
     overflow-y: auto;
+}
+
+.photoprincipale
+{
+	text-align: center;
+	
 }
 
 .public
 {
     margin-left:2vw;
     width:60vw;
+    border:1px solid black;
+    box-shadow: 5px 5px 5px black;
 
 }
 
