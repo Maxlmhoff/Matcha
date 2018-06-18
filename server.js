@@ -41,6 +41,7 @@ con.connect(function(err) { if (err) throw err
         gender VARCHAR(255), \
         orientation VARCHAR(255), \
         bio TEXT, \
+        age INT DEFAULT 0, \
         score INT DEFAULT 0, \
         location TEXT, \
         showlocation INT DEFAULT 1, \
@@ -87,6 +88,9 @@ server.get('/', function(req,res){
     req.session.destroy()
     ssn = 0;
     res.redirect('/')
+})
+.get('/public_profile', function(req,res){
+   res.render('public_profile.ejs', {css: css, profile: ssn.profile}) //faudra changer ssn.profile pour le profile de l'utilisateur selectionné
 })
 .post('/register', urlencodedParser, function(req,res){
     eval(fs.readFileSync(__dirname + "/back/register.js")+'')

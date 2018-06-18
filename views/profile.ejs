@@ -12,7 +12,7 @@
     <% if (typeof success !== 'undefined' && success) { 
     %> <div id=success><strong>Success: <%- success %></strong></div> <% } %>
 </div>
-    <h1 id="ypro"> Your profile </h1>
+    <h1 id="ypro"><%- profile.login %> : Your profile </h1>
     <div class="profile">
         <h2>Score</h3>
     <div class="score">
@@ -116,6 +116,11 @@
         </select>
         <input class="profilebutton" type="submit" name="sub_gender" value="Modify">
         </form>
+         <form action="/profile" method="post">
+            Your Age :
+        <input class="profilebox" style="width: 50px;" type="number" name="age" value="<%- profile.age %>">
+        <input class="profilebutton" type="submit" name="sub_age" value="Modify">
+        </form>
         <div class="bio">
         Your Biography:
         <form action="/profile" method="post">
@@ -143,7 +148,8 @@
      </div>
     </div>
 </div>
-</body></html>
+</body>
+ </html>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
 $(document).ready(function()

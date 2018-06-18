@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8" />
+    <title>Your Profile</title>
+     <%- css.style %>
+</head>
+<body id="pageprofil">
+<% include header.ejs %>
+<div class='left grey'>
+	<img class=img src="<%- profile.img1 %>"><BR \>
+	<img class=img src="<%- profile.img2 %>"><BR \>
+	<img class=img src="<%- profile.img3 %>"><BR \>
+	<img class=img src="<%- profile.img4 %>"><BR \>
+	<img class=img src="<%- profile.img5 %>"><BR \>
+</div>
+<div class='grey public'>
+	<h1><%- profile.firstname %>  <%- profile.lastname %>'s Profile</h1>
+
+	<HR \>
+	<h2> Username: <%- profile.login %> </h2>
+	<h2> Gender: <%- profile.gender %> </h2>
+	<h2> Age: </h2>
+	<h2> Sexual Orientation: <%- profile.orientation %> </h2>
+	<h2> Score of Popularity: <%- profile.score %> </h2>
+	<h2> Biography: </h2>
+	<p class=white><%- profile.bio %> </p>
+	
+	<%
+       if (typeof profile && profile.tag) { i = 0
+       	 while (profile.tag[i]) { %>
+            <div class="tag"><strong>#<%- profile.tag[i].tag %> </strong></div>
+        <% i++ }} %>
+</div>
+<% if (typeof profile && profile.showlocation == 1) {  %>
+<i style="margin-left:2vw;">Location: <%- profile.location %></i>
+
+<% }  %>
+</body></html>

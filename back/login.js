@@ -29,7 +29,7 @@ else if (req.body.login && req.body.pass)
                             i = 0;
                             ssn.profile.tag = result
                       })
-                       res.render('login.ejs', {css: css, success: 'CONGRADULATION YOU ARE LOGGED IN'})
+                       res.render('login.ejs', {css: css, success: 'CONGRATULATION YOU ARE LOGGED IN'})
                    }
                    else
                        res.render('login.ejs', {css: css, error: 'A confirmation e-mail has been sent'})

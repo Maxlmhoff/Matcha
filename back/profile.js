@@ -79,6 +79,10 @@ else if (req.body.gender && req.body.sub_gender === 'Modify')
     else
         res.render('profile.ejs', {css: css, error: 'Select a gender to update', profile: ssn.profile})
 }
+else if (req.body.age && req.body.sub_age === 'Modify')
+{
+    updateuser(age, req.body.age)
+}
 else if (req.body.bio && req.body.sub_bio === 'Update Biography')
 {
     var change = eschtml(req.body.bio)
