@@ -44,6 +44,7 @@ con.connect(function(err) { if (err) throw err
         age INT DEFAULT 0, \
         score INT DEFAULT 0, \
         location TEXT, \
+        fakelocation TEXT, \
         showlocation INT DEFAULT 1, \
         img1 VARCHAR(255) DEFAULT 'empty.png', \
         img2 VARCHAR(255) DEFAULT 'empty.png', \

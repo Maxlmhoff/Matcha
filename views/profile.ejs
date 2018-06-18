@@ -21,7 +21,11 @@
        <h2>Location</h2>
     <div class="location">
         <i>Your actual location :</i> <strong><%- profile.location %></strong><br/><hr/>
-        <label><span style="margin-right: 10px;"> Show your location ? </span>
+        <form action="profile" method="post"><i>Your fake location :</i> 
+            <input class="profilebox" type="text" name="modifloc" id="modifloc" placeholder="<%- profile.fakelocation %>" maxlenght="100" required>
+            <input class="profilebutton" type="submit" name="fakeloc" value="Modify" id="changefakeloc" disabled="disabled">
+        </form><hr/>
+        <label><span style="margin-right: 10px;"> Show your real location ? </span>
             <input type="checkbox" name="checkboxName" class="checklocation"/>
             <div id="switch" class="switch <% if (profile.showlocation === 1) { %> switchOn <% } %>"></div>
         </label>
@@ -173,7 +177,8 @@ $('.switch').click(function()
 });
 </script>
 <script>
-
+    modifloc = document.getElementById('modifloc');
+    fakeloc = document.getElementById('changefakeloc');
     change = document.getElementById('change');
     modif = document.getElementById('modifyuser');
     confirm = document.getElementById('confirm');
@@ -189,7 +194,12 @@ $('.switch').click(function()
     if (newtag.value != "")
         tagbutton.disabled = false;
     else
-        tagbutton.disabled = true; }
+        tagbutton.disabled = true;
+    if (modifloc.value != "")
+        fakeloc.disabled = false;
+    else
+        fakeloc.disabled = true;
+}
 
     window.onload = placeholder();
     function placeholder() {

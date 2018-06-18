@@ -81,7 +81,7 @@ else if (req.body.gender && req.body.sub_gender === 'Modify')
 }
 else if (req.body.age && req.body.sub_age === 'Modify')
 {
-    updateuser(age, req.body.age)
+    updateuser('age', req.body.age)
 }
 else if (req.body.bio && req.body.sub_bio === 'Update Biography')
 {
@@ -146,6 +146,11 @@ else if (req.body.switch)
             res.render('profile.ejs', {css: css, success: 'Show Location actived !', profile: ssn.profile})
         })
     }
+}
+else if (req.body.modifloc && req.body.fakeloc === 'Modify')
+{
+    var loc = eschtml(req.body.modifloc)
+    updateuser('fakelocation', loc)
 }
 else
 {
